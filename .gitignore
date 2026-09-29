@@ -1,0 +1,31 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+# production
+/build
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# local env files
+.env
+.env*.local
+# vercel
+.vercel
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+# OS
+.DS_Store
+Thumbs.db
+
+# working materials — not deployed
+source-photos/
+qa/

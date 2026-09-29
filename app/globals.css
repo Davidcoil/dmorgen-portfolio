@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* ============================================================================
+ * Design tokens — "עריכתי פרימיום": דף נייר חם · דיו עמוק · זהב מאופק.
+ * דיספליי גיאומטרי לכותרות (Secular One) · סנס שקט לגוף (Rubik).
+ * עקרון: הלקוח במרכז, הטקסט לא נלחם בתמונה, ריווח נדיב, קווים דקים.
+ * ========================================================================== */
+@theme {
+  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-secular), "Heebo", "Arial", sans-serif;
+
+  --color-background: #faf6ec; /* נייר חם */
+  --color-foreground: #1d1812; /* דיו */
+
+  --color-card: #fffdf7;
+  --color-card-foreground: #1d1812;
+  --color-popover: #fffdf7;
+  --color-popover-foreground: #1d1812;
+
+  --color-primary: #a8823f; /* זהב מאופק */
+  --color-primary-foreground: #faf6ec;
+
+  /* סקאלת שמפניה — מבטאים עדינים בלבד */
+  --color-champagne-100: #f6efdd;
+  --color-champagne-200: #eadcbd;
+  --color-champagne-300: #d9c08d;
+  --color-champagne-400: #c2a05e;
+  --color-champagne-500: #a8823f;
+  --color-champagne-600: #7d5f2e;
+  --color-champagne-700: #5f4822;
+
+  --color-secondary: #f1e9d4;
+  --color-secondary-foreground: #1d1812;
+  --color-muted: #f3eddc;
+  --color-muted-foreground: #857462;
+  --color-accent: #a8823f;
+  --color-accent-foreground: #faf6ec;
+
+  --color-espresso: #201a13;
+  --color-espresso-soft: #2e261c;
+
+  --color-border: #e7dcc2; /* קו שיער */
+  --color-input: #e7dcc2;
+  --color-ring: #a8823f;
+
+  --color-destructive: #c04545;
+  --color-destructive-foreground: #faf6ec;
+
+  --radius-lg: 0.6rem;
+  --radius-md: 0.45rem;
+  --radius-sm: 0.3rem;
+
+  /* תנועה עדינה עם כוונה — שום דבר לקישוט */
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 1.4s ease both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.005em;
+  }
+
+  /* מסגרת מיקוד אחידה לכל האינטראקטיביים — נגישות בלי להמציא צבעים */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: #a8823f;
+    color: #faf6ec;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1e9d4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d3c096;
+    border-radius: 8px;
+    border: 2px solid #f1e9d4;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a8823f;
+  }
+}
