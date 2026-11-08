@@ -6,7 +6,7 @@
 `ImageResponse` של Next (כבר כלול, אפס תלויות) מייצר תמונות 1200×630 בעיצוב הבית: לכל חדר, לכל חותם על הקיר, לכל מחשבה, ולכל תוצאה שתבוא (משחקים, חדר הצילום).
 
 ## קבצים שמותר לגעת בהם
-- `lib/og/{theme,fonts,card}.tsx`: רקע לילה, אור בחלון, גופן Suez One (נטען כ-ArrayBuffer מ-`public/fonts/`, יש להוסיף את קובץ ה-TTF; רישיון OFL), שם הבית בפינה.
+- `lib/og/{theme,fonts,card}.tsx`: רקע לילה, אור בחלון, גופן Heebo 900 (נטען כ-ArrayBuffer מ-`public/fonts/`; ImageResponse לא קורא woff2, ולכן יש להוסיף קובץ TTF סטטי; רישיון OFL), שם הבית בפינה.
 - `app/[lang]/[room]/opengraph-image.tsx`: שם החדר + השלט/התקציר.
 - `app/[lang]/wall/[id]/opengraph-image.tsx`: הציטוט, השם, "מהקיר של דוד".
 - `app/[lang]/thoughts/[id]/opengraph-image.tsx`: המחשבה.

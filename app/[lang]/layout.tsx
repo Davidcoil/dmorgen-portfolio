@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suez_One, Rubik } from "next/font/google";
 import "../globals.css";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, isRtlLocale, locales, type Locale } from "@/lib/i18n/config";
@@ -10,21 +9,9 @@ import { professionalServiceJsonLd } from "@/lib/seo/jsonld";
 
 /* ============================================================================
  * שלד הבית לכל שפה: <html> עם lang ו-dir, גופנים, כותרת, פוטר, סכמה.
- * דיספליי: Suez One, כבד וחם, עברית שלא מתביישת. גוף: Rubik.
+ * גופן אחד, Heebo, מאוחסן אצלנו (public/fonts, נטען ב-globals.css):
+ * אחידות, בלי תלות ב-Google Fonts בזמן בנייה, ובלי עוגיות או קריאות החוצה.
  * ========================================================================== */
-const fontDisplay = Suez_One({
-  subsets: ["hebrew", "latin"],
-  variable: "--font-display",
-  display: "swap",
-  weight: "400",
-});
-
-const fontBody = Rubik({
-  subsets: ["hebrew", "latin"],
-  variable: "--font-body",
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -68,12 +55,9 @@ export default async function LangLayout({ children, params }: LangParams & { ch
   const dict = await getDictionary(locale);
 
   return (
-    <html
-      lang={locale}
-      dir={isRtlLocale(locale) ? "rtl" : "ltr"}
-      className={`${fontBody.variable} ${fontDisplay.variable}`}
-    >
+    <html lang={locale} dir={isRtlLocale(locale) ? "rtl" : "ltr"}>
       <body className="min-h-screen bg-night text-paper">
+        <link rel="preload" href="/fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <a href="#content" className="skip-link">
           {dict.house.skipToContent}
         </a>
