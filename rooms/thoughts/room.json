@@ -10,8 +10,8 @@
   },
   "door": "soon",
   "sign": {
-    "he": "מה שאני שולח מהטלפון בשתיים בלילה. הקו עוד לא מחובר.",
-    "en": "What I send from my phone at 2am. The line is not connected yet."
+    "he": "מה שאני שולח מהטלפון. הקו מתחבר בקרוב.",
+    "en": "What I send from my phone. The line connects soon."
   },
   "order": 40,
   "phase": 1

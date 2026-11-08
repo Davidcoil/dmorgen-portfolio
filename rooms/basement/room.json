@@ -11,8 +11,8 @@
   "door": "locked",
   "unlock": "marked",
   "sign": {
-    "he": "יש שם דברים שעובדים. ייפתח למי שישאיר חותם על הקיר למעלה.",
-    "en": "There are things down there that work. It opens for whoever leaves a mark on the wall upstairs."
+    "he": "נפתח למי שמשאיר חותם על הקיר.",
+    "en": "Opens for whoever leaves a mark on the wall."
   },
   "order": 90,
   "phase": 3

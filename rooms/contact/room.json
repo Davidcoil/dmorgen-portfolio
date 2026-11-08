@@ -10,8 +10,8 @@
   },
   "door": "soon",
   "sign": {
-    "he": "הדלפק עוד בהרכבה. בינתיים אני בוואטסאפ, שם אני תמיד עובד.",
-    "en": "The counter is still being assembled. Meanwhile I am on WhatsApp, where I always work."
+    "he": "בהרכבה. בינתיים אני בוואטסאפ.",
+    "en": "Being assembled. Meanwhile, I'm on WhatsApp."
   },
   "order": 50,
   "phase": 1
