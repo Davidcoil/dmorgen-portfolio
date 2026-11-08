@@ -5,7 +5,11 @@
       "startServerReadyPattern": "Ready in|started server|Local:",
       "url": ["http://localhost:3000/he", "http://localhost:3000/en", "http://localhost:3000/he/wall"],
       "numberOfRuns": 2,
-      "settings": { "preset": "perf", "formFactor": "mobile", "screenEmulation": { "mobile": true, "width": 390, "height": 844, "deviceScaleFactor": 3 } }
+      "settings": {
+        "onlyCategories": ["performance", "accessibility", "best-practices", "seo"],
+        "formFactor": "mobile",
+        "screenEmulation": { "mobile": true, "width": 390, "height": 844, "deviceScaleFactor": 3, "disabled": false }
+      }
     },
     "assert": {
       "assertions": {
