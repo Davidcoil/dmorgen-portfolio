@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import "@/components/house/house.css";
+import { Analytics } from "@vercel/analytics/next";
 import { HouseMotion } from "@/components/house/house-motion";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, isRtlLocale, locales, type Locale } from "@/lib/i18n/config";
@@ -82,6 +83,7 @@ export default async function LangLayout({ children, params }: LangParams & { ch
         <HouseHeader lang={locale} dict={dict} />
         <main id="content">{children}</main>
         <HouseFooter lang={locale} dict={dict} />
+        <Analytics />
       </body>
     </html>
   );

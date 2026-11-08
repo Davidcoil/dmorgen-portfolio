@@ -10,7 +10,7 @@
   --px: 68%;
   --py: 34%;
   --W: max(100vw, 900px);
-  --dw: clamp(190px, 40dvh, 340px);
+  --dw: clamp(190px, 40lvh, 340px);
 }
 
 main,
@@ -74,7 +74,7 @@ footer {
 /* ---------- הכניסה ---------- */
 .arrival {
   position: relative;
-  min-height: 100dvh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   isolation: isolate;
@@ -264,7 +264,7 @@ footer {
 .stage {
   position: sticky;
   top: 0;
-  height: 100dvh;
+  height: 100lvh;
   overflow: clip;
   perspective: 620px;
   perspective-origin: 50% 56%;
@@ -313,7 +313,7 @@ footer {
 }
 .wall {
   top: 0;
-  height: 100dvh;
+  height: 100lvh;
   width: var(--D);
   background:
     linear-gradient(to top, #11141b 0, #11141b 16%, rgb(200 155 90 / 0.35) 16%, rgb(200 155 90 / 0.35) calc(16% + 2px), transparent calc(16% + 2px)),
@@ -334,7 +334,7 @@ footer {
   left: calc(50% - var(--W) / 2);
   width: var(--W);
   top: 0;
-  height: 100dvh;
+  height: 100lvh;
   transform: translateZ(calc(var(--D) * -1));
   background: radial-gradient(60% 60% at 50% 60%, #262b37, #12151c);
 }
@@ -360,7 +360,7 @@ a.room:focus-visible .plate {
 
 /* דלת */
 .door {
-  --dh: 80dvh;
+  --dh: 80lvh;
   position: absolute;
   bottom: 0;
   left: calc(var(--dw) / -2);
@@ -477,7 +477,7 @@ a.room:focus-visible .plate {
   background: #efe4cc;
   color: #2a2219;
   font-weight: 800;
-  font-size: clamp(1rem, 2.4dvh, 1.5rem);
+  font-size: clamp(1rem, 2.4lvh, 1.5rem);
   white-space: nowrap;
   box-shadow: 0 8px 16px -6px rgb(0 0 0 / 0.8);
 }
@@ -487,7 +487,7 @@ a.room:focus-visible .plate {
   --pw: clamp(150px, 21vw, 300px);
   position: absolute;
   left: calc(var(--pw) / -2);
-  bottom: 62dvh;
+  bottom: 62lvh;
   width: var(--pw);
   padding: 14px 18px 15px;
   background: linear-gradient(180deg, #232833, #171b23);
@@ -525,15 +525,15 @@ a.room:focus-visible .plate {
 }
 .end .plate {
   transform: none;
-  bottom: 84dvh;
+  bottom: 84lvh;
 }
 
 /* תמונות על הקיר: אנשים */
 .frame {
-  --fw: clamp(200px, 40dvh, 350px);
+  --fw: clamp(200px, 40lvh, 350px);
   position: absolute;
   left: calc(var(--fw) / -2);
-  bottom: 27dvh;
+  bottom: 27lvh;
   width: var(--fw);
   aspect-ratio: 4 / 5;
   background: #f4eee2;
@@ -639,13 +639,13 @@ a.room:focus-visible .plate {
     --m2: linear-gradient(to bottom, #000 50%, transparent 94%);
     position: relative;
     width: 100%;
-    height: 64dvh;
+    height: 64svh;
     left: auto;
     right: auto;
   }
   .copy {
     width: 100%;
-    margin-top: -20dvh;
+    margin-top: -20svh;
     padding: 0 20px 60px;
   }
   .copy h1 {
@@ -659,6 +659,33 @@ a.room:focus-visible .plate {
   }
   .plate small {
     font-size: 0.8rem;
+  }
+}
+
+/* מגע: אין פנס. האור עומד על הפנים, ומורידים שכבות שיקרות לטלפון. */
+@media (hover: none) {
+  :root {
+    --lx: 68vw;
+    --ly: 24svh;
+  }
+  .scene .lit {
+    --r: radial-gradient(80vmin 80vmin at 68% 34%, #000 0, rgb(0 0 0 / 0.9) 45%, transparent 82%);
+  }
+  .grain,
+  .stage::after {
+    display: none;
+  }
+  .frame::before {
+    mix-blend-mode: normal;
+    opacity: 0.45;
+  }
+  .inside img {
+    filter: none;
+  }
+  .floor {
+    background:
+      repeating-linear-gradient(to bottom, transparent 0, rgb(255 176 66 / 0.15) 260px, transparent 520px),
+      #1a1e27;
   }
 }
 

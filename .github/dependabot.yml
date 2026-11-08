@@ -1,0 +1,16 @@
+# עדכוני אבטחה אוטומטיים (FOUNDATION §5). PR אחד בחודש, וה-CI שומר.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    target-branch: house
+    schedule:
+      interval: monthly
+    groups:
+      all:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: house
+    schedule:
+      interval: monthly

@@ -11,19 +11,22 @@ export function walkTo(slug: string, smooth = true): boolean {
   const door = document.querySelector<HTMLElement>(`.room[data-slug="${slug}"]`);
   if (!hall || !stage || !door || reduced()) return false;
   const t = Math.min(1, Math.max(0, (Number(door.dataset.z) - 760) / Number(stage.dataset.travel)));
-  const top = hall.getBoundingClientRect().top + scrollY + (hall.offsetHeight - innerHeight) * t;
+  const top = hall.getBoundingClientRect().top + scrollY + (hall.offsetHeight - stage.offsetHeight) * t;
   scrollTo({ top, behavior: smooth ? "smooth" : "instant" });
   return true;
 }
 
 /* ============================================================================
- * כל התנועה של הבית, בלולאה אחת: האור שעוקב אחרי היד, הצ'יפים שמגיבים אליו,
- * וההליכה במסדרון. נטען פעם אחת ב-layout. בלי ספריות. מכבד פחות-תנועה.
+ * כל התנועה של הבית, בלולאה אחת. בלי ספריות. מכבד פחות-תנועה.
+ * עכבר: האור עוקב אחרי היד. מגע: האור עומד על הפנים והלולאה רק הולכת במסדרון,
+ * כי אצבע שגוללת היא לא יד שמחזיקה פנס (והאור קפץ איתה).
+ * ההחלקה לפי זמן ולא לפי פריים, כדי שתרגיש אותו דבר ב-60Hz וב-120Hz.
  * ========================================================================== */
 export function HouseMotion() {
   useEffect(() => {
     if (reduced()) return;
     const root = document.documentElement;
+    const touch = matchMedia("(hover: none)").matches;
     let tx = innerWidth * 0.3;
     let ty = innerHeight * 0.34;
     let x = tx;
@@ -33,20 +36,21 @@ export function HouseMotion() {
     let lookX = 0;
     let lookY = 0;
     let raf = 0;
+    let prev = performance.now();
+    let lastTransform = "";
+    const written = new WeakMap<HTMLElement, string>();
+    const ease = (dt: number, tau: number) => 1 - Math.exp(-dt / tau);
 
-    const move = (cx: number, cy: number) => {
-      tx = cx;
-      ty = cy;
+    const onPointer = (e: PointerEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
       last = performance.now();
     };
-    const onPointer = (e: PointerEvent) => move(e.clientX, e.clientY);
-    const onTouch = (e: TouchEvent) => move(e.touches[0].clientX, e.touches[0].clientY);
 
-    function frame(now: number) {
+    function light(now: number, dt: number) {
       const vw = innerWidth;
       const vh = innerHeight;
       const scene = document.getElementById("scene")?.getBoundingClientRect();
-
       if (now - last > 3200) {
         if (scene && scene.bottom > vh * 0.35) {
           /* כשאין יד, האור חוזר לפנים */
@@ -58,11 +62,13 @@ export function HouseMotion() {
           ty = vh * (0.52 + Math.cos(t * 0.3) * 0.12);
         }
       }
-      x += (tx - x) * 0.08;
-      y += (ty - y) * 0.08;
+      const k = ease(dt, 200);
+      x += (tx - x) * k;
+      y += (ty - y) * k;
       root.style.setProperty("--lx", `${x}px`);
       root.style.setProperty("--ly", `${y}px`);
-
+      lookX += ((x / vw - 0.5) * 3 - lookX) * ease(dt, 260);
+      lookY += ((0.5 - y / vh) * 1.6 - lookY) * ease(dt, 260);
       if (scene) {
         root.style.setProperty("--px", `${x - scene.left}px`);
         root.style.setProperty("--py", `${y - scene.top}px`);
@@ -74,29 +80,44 @@ export function HouseMotion() {
           });
         }
       }
+    }
 
+    function walk(dt: number) {
       const hall = document.getElementById("map");
       const stage = document.getElementById("stage");
       const world = document.getElementById("world");
-      if (hall && stage && world) {
-        const h = hall.getBoundingClientRect();
-        if (h.top < vh && h.bottom > 0) {
-          const travel = Number(stage.dataset.travel);
-          const p = Math.min(1, Math.max(0, -h.top / (h.height - vh)));
-          cam += (p * travel - cam) * 0.1;
-          lookX += ((x / vw - 0.5) * 3 - lookX) * 0.06;
-          lookY += ((0.5 - y / vh) * 1.6 - lookY) * 0.06;
-          world.style.transform = `rotateY(${(-lookX).toFixed(3)}deg) rotateX(${lookY.toFixed(3)}deg) translateZ(${cam.toFixed(1)}px)`;
-          stage.classList.toggle("walking", cam > 90);
-          world.querySelectorAll<HTMLElement>("[data-z]").forEach((el) => {
-            const d = Number(el.dataset.z) - cam;
-            /* opacity ולא visibility: דלת שעברנו חייבת להישאר נגישה למקלדת */
-            el.style.opacity = String(d > 3000 ? 0 : d < 240 ? Math.max(0, (d - 70) / 170) : 1);
-            el.style.pointerEvents = d < 70 ? "none" : "";
-            if (el.classList.contains("lit")) el.classList.toggle("near", d > 120 && d < 1250);
-          });
-        }
+      if (!hall || !stage || !world) return;
+      const h = hall.getBoundingClientRect();
+      if (h.top >= innerHeight || h.bottom <= 0) return;
+      const travel = Number(stage.dataset.travel);
+      /* גובה הבמה ולא innerHeight: בטלפון סרגל הכתובת משנה את innerHeight תוך כדי גלילה */
+      const p = Math.min(1, Math.max(0, -h.top / (h.height - stage.offsetHeight)));
+      cam += (p * travel - cam) * ease(dt, touch ? 110 : 160);
+      const transform = `rotateY(${(-lookX).toFixed(2)}deg) rotateX(${lookY.toFixed(2)}deg) translateZ(${cam.toFixed(1)}px)`;
+      if (transform !== lastTransform) {
+        world.style.transform = transform;
+        lastTransform = transform;
       }
+      stage.classList.toggle("walking", cam > 90);
+      world.querySelectorAll<HTMLElement>("[data-z]").forEach((el) => {
+        const d = Number(el.dataset.z) - cam;
+        /* opacity ולא visibility: דלת שעברנו חייבת להישאר נגישה למקלדת */
+        const opacity = d > 3000 ? 0 : d < 240 ? Math.max(0, (d - 70) / 170) : 1;
+        const near = el.classList.contains("lit") && d > 120 && d < 1250;
+        const key = `${opacity.toFixed(2)}|${near}`;
+        if (written.get(el) === key) return;
+        written.set(el, key);
+        el.style.opacity = opacity.toFixed(2);
+        el.style.pointerEvents = d < 70 ? "none" : "";
+        if (el.classList.contains("lit")) el.classList.toggle("near", near);
+      });
+    }
+
+    function frame(now: number) {
+      const dt = Math.min(now - prev, 64);
+      prev = now;
+      if (!touch) light(now, dt);
+      walk(dt);
       raf = requestAnimationFrame(frame);
     }
 
@@ -118,9 +139,7 @@ export function HouseMotion() {
     };
     const onShow = () => document.getElementById("flood")?.classList.remove("on");
 
-    addEventListener("pointermove", onPointer, { passive: true });
-    addEventListener("touchstart", onTouch, { passive: true });
-    addEventListener("touchmove", onTouch, { passive: true });
+    if (!touch) addEventListener("pointermove", onPointer, { passive: true });
     addEventListener("pageshow", onShow);
     document.addEventListener("click", onClick);
     document.addEventListener("focusin", onFocus);
@@ -129,8 +148,6 @@ export function HouseMotion() {
     return () => {
       cancelAnimationFrame(raf);
       removeEventListener("pointermove", onPointer);
-      removeEventListener("touchstart", onTouch);
-      removeEventListener("touchmove", onTouch);
       removeEventListener("pageshow", onShow);
       document.removeEventListener("click", onClick);
       document.removeEventListener("focusin", onFocus);
