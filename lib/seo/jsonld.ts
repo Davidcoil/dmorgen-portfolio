@@ -112,15 +112,28 @@ export function personJsonLd({ lang, description }: PersonInput) {
     url: `${base}/${lang}/about`,
     image: `${base}/images/about-david-real.jpg`,
     telephone: "+972525555970",
-    jobTitle: he ? "צלם אירועים ומשפחה" : "Events and family photographer",
+    jobTitle: he
+      ? "צלם, כותב ובונה כלי AI"
+      : "Photographer, copywriter and AI systems builder",
+    homeLocation: {
+      "@type": "City",
+      name: he ? "ירושלים" : "Jerusalem",
+    },
     worksFor: {
       "@type": "ProfessionalService",
       name: "דוד מורגנשטרן",
       url: `${base}/${lang}`,
     },
     knowsAbout: he
-      ? ["צילום אירועים", "צילום משפחה", "צילום בר מצווה"]
-      : ["Event photography", "Family photography", "Bar Mitzvah photography"],
+      ? ["צילום אירועים", "צילום משפחה", "צילום בר מצווה", "צילום פורטרטים", "קופירייטינג", "כלי AI לעסקים"]
+      : [
+          "Event photography",
+          "Family photography",
+          "Bar Mitzvah photography",
+          "Portrait photography",
+          "Copywriting",
+          "AI tools for small businesses",
+        ],
   };
 }
 

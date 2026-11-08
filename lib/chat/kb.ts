@@ -63,8 +63,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["hello", "hi", "hey", "good morning", "good evening", "morning"],
       },
       answer: L(
-        "היי! איזה כיף שבאתם. אני העוזר של דוד — שאלו אותי על סוגי הצילומים, מחירים, תהליך העבודה או קביעת תאריך.",
-        "Hi! So glad you're here. I'm David's assistant — ask me about the photography services, pricing, the process, or booking a date."
+        "היי. אני העוזר של דוד, הוא כתב אותי, אז אם אני חצוף זה ממנו. שאלו על סוגי הצילומים, מחיר, איך זה עובד או תאריך.",
+        "Hi. I'm David's assistant. He wrote me, so if I'm cheeky, blame him. Ask about the kinds of shoots, pricing, how it works, or a date."
       ),
     },
     {
@@ -74,8 +74,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["event", "bar mitzvah", "bat mitzvah", "brit", "birthday", "corporate", "celebration", "party"],
       },
       answer: L(
-        "דוד מצלם אירועים משפחתיים ועסקיים: בר/בת מצווה, בריתות, ימי הולדת ואירועי חברה. אתם חוגגים — הוא כבר דואג שהכל ייראה מעולה.",
-        "David photographs family and corporate events: bar/bat mitzvahs, brit ceremonies, birthdays and company events. A cinematic, emotional style — an artistic eye with technological precision, so you celebrate and he takes care of the rest."
+        "בר ובת מצווה, בריתות, ימי הולדת ואירועי חברה. לפני האירוע דוד שואל מי חייב להיות בתמונות ומה אסור לפספס, ואז דואג שהם יהיו שם. אתם רק חוגגים.",
+        "Bar and Bat Mitzvahs, brit ceremonies, birthdays and company events. Before the day, David asks who has to be in the photos and what can't be missed, then makes sure they're there. You just celebrate."
       ),
       actions: [
         {
@@ -92,8 +92,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["family", "kids", "children", "outdoor", "nature", "family shoot"],
       },
       answer: L(
-        "צילומי משפחה בטבע או בסטודיו נייד — חוויה רגועה וכיפית, בלי פוזות מאולצות. התוצאה: תמונות טבעיות שמרגישות בדיוק כמו אתם.",
-        "Family shoots in nature or with a mobile studio — a relaxed, fun experience with no forced poses. The result: natural photos that feel like a real memory."
+        "צילומי משפחה בטבע או במקום שאתם אוהבים. יש את התמונה שבה כולם מסתכלים למצלמה, ויש את מה שקורה ביניכם כשמפסיקים לחשוב עליה. דוד מחפש מקום לשניהם.",
+        "Family sessions outdoors or at a place you love. There's the photo where everyone looks at the camera, and there's what happens between you when you stop thinking about it. David makes room for both."
       ),
       actions: [
         {
@@ -110,8 +110,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["portrait", "personal", "empowerment", "pregnancy", "maternity", "headshot"],
       },
       answer: L(
-        "פורטרטים אישיים, צילומי העצמה והיריון — מפגש שמחזיר לאנשים את המבט הטוב על עצמם. אינטימי, מכבד, ועם תוצאה ששווה מסגרת.",
-        "Personal portraits, empowerment and maternity shoots — a session that gives people back a kinder look at themselves. Intimate, respectful, and frame-worthy."
+        "פורטרטים, צילומי הריון ותדמית אישית. לא צריך לדעת להצטלם: איפה לעמוד, לאן להסתכל ומה לעשות, זה התפקיד של דוד. שלכם רק להרגיש בנוח, וגם בזה הוא עוזר.",
+        "Portraits, maternity and personal branding. You don't need to know how to pose: where to stand, where to look and what to do is David's job. Yours is to feel comfortable, and he helps with that too."
       ),
       actions: [
         {
@@ -128,8 +128,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["business", "branding", "corporate", "team", "conference", "headshots", "linkedin", "company"],
       },
       answer: L(
-        "מיתוג עסקי: צילומי תדמית, צוות, כנסים ואירועי חברה. תמונות שגורמות לעסק להיראות כמו שהוא: רציני, אנושי ומקצועי.",
-        "Business branding: executive portraits, team photos, conferences and corporate events. Images that make the business look the way it really is — serious, human and professional."
+        "פורטרטים לצוות, אירועי חברה ותוכן מצולם לאתר. דוד קודם שואל מי יראה את התמונות ומה הן צריכות לומר עליכם, ואז מצלם. לפני שמסבירים מי אתם, רואים אתכם.",
+        "Team portraits, company events and photo content for your website. David first asks who will see the images and what they should say about you, then shoots. People see you before they read about you."
       ),
       actions: [
         {
@@ -146,8 +146,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["price", "cost", "how much", "pricing", "package", "rate", "rates"],
       },
       answer: L(
-        "כל אירוע מתומחר אישית לפי היקף, מיקום וצרכים — אין מחירון קבוע באתר. הדרך הכי מהירה להצעה מדויקת: לספר בקצרה על האירוע בוואטסאפ.",
-        "Every event is quoted personally based on scope, location and needs — there's no fixed price list on the site. The fastest way to get an accurate quote: briefly describe the event on WhatsApp."
+        "המחיר נקבע לפי סוג הצילום, ההיקף, המיקום ומה שתרצו לקבל בסוף. אחרי שיחה קצרה מקבלים הצעה כתובה עם כל מה שכלול. הדרך הכי מהירה: לספר בקצרה בוואטסאפ מה מצלמים.",
+        "The price depends on the type of shoot, its scope, the location and what you want to receive. After a short call you get a written proposal with everything included. Fastest way: tell David briefly on WhatsApp what you're shooting."
       ),
       actions: [wa(lang === "he" ? "היי דוד! אשמח לקבל הצעת מחיר לצילומים." : "Hi David! I'd love a quote for a photography session.")],
     },
@@ -158,8 +158,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["book", "date", "schedule", "reserve", "available", "availability", "appointment"],
       },
       answer: L(
-        "קובעים תאריך דרך עמוד צור הקשר באתר או ישירות בוואטסאפ — בשני המקרים ההודעה כבר מוכנה, רק לשלוח.",
-        "Book a date through the booking form on the site or directly on WhatsApp — either way the message is pre-filled with the details, just send it."
+        "קובעים תאריך דרך הטופס באתר או ישירות בוואטסאפ. בשני המקרים ההודעה כבר מוכנה, רק לשלוח. דוד קורא הכול בעצמו, גם בשתיים בלילה.",
+        "Book a date through the form on the site or directly on WhatsApp. Either way the message is pre-filled, just send it. David reads everything himself, even at 2am."
       ),
       actions: [
         {
@@ -177,8 +177,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["delivery", "how long", "turnaround", "ready", "editing", "when will"],
       },
       answer: L(
-        "התמונות עוברות מיון ועריכה מקצועית ומוכנות תוך מספר ימים עד שבוע — תלוי בהיקף האירוע. שווה לחכות.",
-        "The photos go through professional sorting and editing and are ready within a few days up to a week — depending on the event's scope. Worth the wait."
+        "בדרך כלל עד שבוע מהאירוע, אחרי מיון ועריכה. את המועד המדויק סוגרים לפני ההזמנה, כך שאף אחד לא צריך לנחש.",
+        "Usually within a week of the event, after selection and editing. The exact date is set before booking, so nobody has to guess."
       ),
     },
     {
@@ -188,8 +188,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["client area", "select", "choose photos", "my gallery", "my photos", "bchira"],
       },
       answer: L(
-        "אזור הלקוחות (bchira.app) הוא המקום שבו בוחרים בנוחות את התמונות האהובות מהאירוע — מכל מכשיר, בכל זמן.",
-        "The client area (bchira.app) is where you comfortably select your favorite photos from the event — from any device, at any time."
+        "באזור הלקוחות בוחרים את התמונות האהובות מהאירוע, מכל מכשיר ובכל שעה. אזהרה: כולם יצאו טוב, אז לבחור זה החלק הקשה.",
+        "The client area is where you choose your favorite photos from the event, from any device, any time. Fair warning: everyone came out good, so choosing is the hard part."
       ),
       actions: [
         {
@@ -206,8 +206,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["who is", "about david", "the photographer", "behind the camera"],
       },
       answer: L(
-        "דוד מורגנשטרן — צלם, יזם, אבא ואיש טכנולוגיה. מעבר לצילום הוא עוסק ב-AI, יצירת תוכן ומיתוג עסקי — וכל זה מרגישים בתמונות.",
-        "David Morgenstern — photographer, entrepreneur, father and a technology person. Beyond photography he's into AI, content creation and business branding — and it all feeds the eye behind the camera."
+        "דוד מורגנשטרן: מצלם אנשים, כותב, ובונה כלי AI לכל מה שקורה סביב הצילום. אבא. מאמין שלהצטלם טוב זה להרגיש טוב, והמצלמה היא החלק הקטן.",
+        "David Morgenstern: photographs people, writes, and builds AI tools for everything around the shoot. A dad. Believes a good photo starts with feeling good, and the camera is the small part."
       ),
       actions: [
         {
@@ -224,8 +224,8 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["phone", "contact", "talk", "whatsapp", "email", "mail"],
       },
       answer: L(
-        "הכי מהיר — וואטסאפ ישירות לדוד. אפשר גם דרך עמוד צור קשר באתר.",
-        "Fastest — WhatsApp straight to David. You can also use the contact page on the site."
+        "הכי מהיר: וואטסאפ ישירות לדוד. אפשר גם דרך הטופס באתר.",
+        "Fastest: WhatsApp straight to David. The form on the site works too."
       ),
       actions: [
         wa(lang === "he" ? "היי דוד! הגעתי מהאתר, אשמח לדבר." : "Hi David! Coming from the website, I'd love to chat."),
@@ -238,28 +238,28 @@ export function getIntents(lang: Locale): Intent[] {
     {
       id: "wedding",
       keywords: {
-        he: ["חתונה", "חתונות", "כלה", "חתן", "חופה"],
+        he: ["חתונה", "חתונות", "כלה", "חופה"],
         en: ["wedding", "bride", "groom", "weddings"],
       },
       answer: L(
-        "דוד לא מצלם חתונות — ההתמחות שלו היא אירועים משפחתיים ועסקיים וצילומי משפחה, ושם הוא נותן את הלב. אשמח לעזור בכל אחד מאלה!",
-        "David doesn't photograph weddings — his expertise is family and corporate events plus family shoots, where he gives his whole heart. Happy to help with any of those!"
+        "זה לא סוג האירוע שדוד מצלם. מה שכן: בר ובת מצווה, בריתות, ימי הולדת, צילומי משפחה, פורטרטים ועסקים. אשמח לעזור בכל אחד מאלה.",
+        "That's not the kind of event David photographs. What he does: Bar and Bat Mitzvahs, brit ceremonies, birthdays, family sessions, portraits and business photography. Happy to help with any of those."
       ),
     },
     {
       id: "callback",
       keywords: { he: [], en: [] },
       answer: L(
-        "קיבלתי מספר טלפון! רוצים שאעביר לדוד שיחזור אליכם? לחיצה אחת וההודעה נשלחת בוואטסאפ.",
-        "Got a phone number! Want me to pass it to David so he calls you back? One tap and the message goes out on WhatsApp."
+        "קיבלתי מספר. רוצים שדוד יחזור אליכם? לחיצה אחת וההודעה אצלו בוואטסאפ.",
+        "Got the number. Want David to call you back? One tap and the message reaches him on WhatsApp."
       ),
     },
     {
       id: "fallback",
       keywords: { he: [], en: [] },
       answer: L(
-        "לא בטוח שהבנתי עד הסוף — אפשר לנסח אחרת? או פשוט לדבר עם דוד ישירות, הוא עונה מהר.",
-        "Not sure I fully got that — could you rephrase? Or just talk to David directly, he replies fast."
+        "לא הבנתי עד הסוף, וזה עליי, לא עליכם. אפשר לנסח אחרת? או פשוט לכתוב לדוד ישירות, הוא עונה מהר.",
+        "I didn't fully get that, and that's on me, not you. Could you rephrase? Or just write to David directly, he replies fast."
       ),
       actions: [
         wa(lang === "he" ? "היי דוד! שאלה מהאתר." : "Hi David! A question from the website."),

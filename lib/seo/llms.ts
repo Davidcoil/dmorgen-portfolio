@@ -18,13 +18,13 @@ function pagesSection(base: string): string {
   const pages: Array<[string, string]> = [
     ["עמוד הבית (עברית)", `${base}/he`],
     ["Homepage (English)", `${base}/en`],
-    ["סיפורי לקוחות", `${base}/he/galleries`],
+    ["עבודות", `${base}/he/galleries`],
     ["גלריית אירועים", `${base}/he/galleries/events`],
     ["גלריית משפחה וילדים", `${base}/he/galleries/family`],
-    ["פורטרטים אישיים", `${base}/he/galleries/portraits`],
+    ["פורטרטים", `${base}/he/galleries/portraits`],
     ["תדמית לעסקים", `${base}/he/galleries/business`],
-    ["האדם מאחורי המצלמה", `${base}/he/about`],
-    ["יצירת קשר", `${base}/he/contact`],
+    ["על דוד", `${base}/he/about`],
+    ["דברו איתי", `${base}/he/contact`],
   ];
   return pages.map(([label, url]) => `- [${label}](${url})`).join("\n");
 }
@@ -48,20 +48,22 @@ export async function buildLlmsTxt(): Promise<string> {
   });
 
   return [
-    "# David Morgenstern, Events and Family Photographer in Israel",
+    "# David Morgenstern (דוד מורגנשטרן)",
     "",
     "> " + cleanSeoText(he.hero.title) + " " + cleanSeoText(he.hero.subtitle),
     "",
     cleanSeoText(he.meta.description),
     "",
-    "David Morgenstern is an events and family photographer in Israel. " +
+    "David Morgenstern is a photographer, copywriter and AI systems builder based in Jerusalem, " +
+      "working with families and businesses in Israel and abroad. " +
+      "Known for the principle \"there are no unphotogenic people\" and the belief that a good photo starts with feeling good. " +
       cleanSeoText(en.meta.description),
     "",
     "## Services",
     ...categories,
-    "- Corporate events, conferences, business portraits and marketing content.",
-    "- Recognized supplier of the Israel Ministry of Defense, proper tax invoices.",
-    "- Does not photograph weddings. Specializes in family and business events.",
+    "- Company events, conferences, business portraits and photo content for businesses.",
+    "- Family events only (Bar and Bat Mitzvah, brit ceremonies, birthdays), family sessions, portraits and business photography.",
+    "- Also builds AI tools and writes copy for everything around the shoot, for his own studio and for businesses.",
     "",
     "## How it works",
     ...he.home.howItWorks.steps.map(

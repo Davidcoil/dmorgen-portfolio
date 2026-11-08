@@ -19,8 +19,8 @@ function resolveLocale(lang: string): Locale {
 
 /* תיאור מטא ייעודי לעמוד — קצר, עם מילות מפתח, בלי מקף ארוך. */
 const metaDescription: Record<Locale, string> = {
-  he: "דוד מורגנשטרן, צלם אירועים ומשפחה בישראל. אין אנשים לא פוטוגניים, יש אנשים שעוד לא צולמו טוב. הכירו את האדם מאחורי המצלמה.",
-  en: "David Morgenstern, events and family photographer in Israel. No unphotogenic people, only people not yet photographed well. Meet the man behind the camera.",
+  he: "דוד מורגנשטרן: מצלם אנשים, כותב ובונה כלי AI. אין אנשים לא פוטוגניים, יש אנשים שעוד לא הרגישו טוב מול מצלמה. להצטלם טוב זה להרגיש טוב.",
+  en: "David Morgenstern: photographs people, writes, and builds AI tools. There are no unphotogenic people, only people who haven't felt good in front of a camera yet.",
 };
 
 export async function generateMetadata({ params }: LangParams): Promise<Metadata> {

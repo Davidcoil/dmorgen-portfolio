@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
     title: `${dict.nav.contact} · ${dict.meta.siteName}`,
     description:
       locale === "he"
-        ? "בואו נבדוק אם אנחנו מתאימים. ספרו לדוד מה חוגגים, בר מצווה, ברית, יום הולדת או אירוע חברה, וקבלו הצעה מסודרת בלי לחץ ובלי התחייבות."
-        : "Tell David what you're celebrating, a Bar Mitzvah, a brit, a birthday or a company event, and get a clear written quote. No pressure, no commitment.",
+        ? "ספרו לדוד מה מצלמים, איפה ומתי: בר מצווה, ברית, יום הולדת, אירוע חברה, משפחה או פורטרט. בודקים התאמה, ואם ממשיכים מקבלים הצעה כתובה."
+        : "Tell David what you're shooting, where and when: a Bar Mitzvah, a brit, a birthday, a company event, a family session or a portrait. If it fits, you get a written proposal.",
   };
 }
 
