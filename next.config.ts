@@ -16,10 +16,19 @@ const wixRedirects: Array<{
   destination: string;
   permanent: boolean;
 }> = [
-  // דוגמאות — מחק את סימני ההערה ומלא כתובות אמיתיות אחרי מיפוי ה־URLs מוויקס:
-  // { source: "/about-me", destination: "/he/about", permanent: true },
-  // { source: "/gallery", destination: "/he/galleries/events", permanent: true },
-  // { source: "/contact", destination: "/he/contact", permanent: true },
+  // מופה מתוך sitemap.xml של האתר הישן ב-Wix (נשלף 2026-11-08). כותרות העמודים הישנים בהערות.
+  // כתובות בעברית מופיעות פעמיים (מפוענח + מקודד) כי הדפדפנים שולחים אותן בשתי הצורות.
+  { source: "/general-1", destination: "/he/galleries/portraits", permanent: true }, // צילומי דיוקן
+  { source: "/general-6", destination: "/he/galleries/business", permanent: true }, // גרפיקה ומיתוג לעסקים
+  { source: "/projects-7", destination: "/he/galleries/events", permanent: true }, // צילומי משפחות ואירועים
+  { source: "/מה-אני-עושה", destination: "/he/about", permanent: true }, // צילום אישי וסדנאות
+  { source: "/%D7%9E%D7%94-%D7%90%D7%A0%D7%99-%D7%A2%D7%95%D7%A9%D7%94", destination: "/he/about", permanent: true },
+  { source: "/שירותים-נוספים", destination: "/he/galleries", permanent: true },
+  { source: "/%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%D7%9D-%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D", destination: "/he/galleries", permanent: true },
+  { source: "/portfolio", destination: "/he/galleries", permanent: true },
+  { source: "/portfolio/:slug*", destination: "/he/galleries/events", permanent: true }, // צילומי משפחה בר ובת מצווה
+  { source: "/blog", destination: "/he", permanent: true }, // בלוג דמו של Wix, בלי תוכן אמיתי
+  { source: "/post/:slug*", destination: "/he", permanent: true },
 ];
 
 const nextConfig: NextConfig = {
