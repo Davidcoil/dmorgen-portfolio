@@ -9,9 +9,10 @@ export function HouseHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) 
     <header className="absolute inset-x-0 top-0 z-20">
       <nav
         aria-label={dict.house.name}
-        className="mx-auto flex max-w-6xl items-center justify-between px-5 py-6"
+        className="flex items-center justify-between px-[clamp(20px,4.5vw,64px)] py-6"
       >
         <Link href={`/${lang}`} className="font-display text-xl text-paper hover:text-lamp">
+          <span className="wordmark-dot" aria-hidden />
           {dict.house.name}
         </Link>
         <div className="flex items-center gap-6 text-sm font-bold">

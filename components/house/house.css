@@ -19,6 +19,17 @@ footer {
   z-index: 2;
 }
 
+.wordmark-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-lamp);
+  box-shadow: 0 0 18px 4px rgb(255 176 66 / 0.55);
+  margin-inline-end: 10px;
+  vertical-align: 2px;
+}
+
 .lamp {
   position: fixed;
   inset: 0;
