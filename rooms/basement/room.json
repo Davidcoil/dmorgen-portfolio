@@ -15,5 +15,13 @@
     "en": "Opens for whoever leaves a mark on the wall."
   },
   "order": 90,
-  "phase": 3
+  "phase": 3,
+  "plate": {
+    "he": "המעבדה.",
+    "en": "The lab."
+  },
+  "tape": {
+    "he": "למי שמשאיר חותם",
+    "en": "For those who leave a mark"
+  }
 }

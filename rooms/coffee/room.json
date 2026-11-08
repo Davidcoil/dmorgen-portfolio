@@ -14,5 +14,13 @@
     "en": "Once a week, coffee with someone I haven't met yet. Opens with the house."
   },
   "order": 70,
-  "phase": 2
+  "phase": 2,
+  "plate": {
+    "he": "פעם בשבוע, עם מישהו חדש.",
+    "en": "Once a week, with someone new."
+  },
+  "tape": {
+    "he": "נפתח עם הבית",
+    "en": "Opens with the house"
+  }
 }

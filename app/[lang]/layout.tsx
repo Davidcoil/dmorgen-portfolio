@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import "@/components/house/house.css";
+import { HouseMotion } from "@/components/house/house-motion";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, isRtlLocale, locales, type Locale } from "@/lib/i18n/config";
 import { HouseHeader } from "@/components/house/header";
@@ -55,9 +57,18 @@ export default async function LangLayout({ children, params }: LangParams & { ch
   const dict = await getDictionary(locale);
 
   return (
-    <html lang={locale} dir={isRtlLocale(locale) ? "rtl" : "ltr"}>
+    <html lang={locale} dir={isRtlLocale(locale) ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className="min-h-screen bg-night text-paper">
+        {/* החושך לפני האור קורה פעם אחת בביקור. רץ לפני הציור הראשון. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('house.lit'))document.documentElement.dataset.lit='1';else sessionStorage.setItem('house.lit','1')}catch(e){}`,
+          }}
+        />
         <link rel="preload" href="/fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <div className="lamp" aria-hidden />
+        <div className="grain" aria-hidden />
+        <HouseMotion />
         <a href="#content" className="skip-link">
           {dict.house.skipToContent}
         </a>

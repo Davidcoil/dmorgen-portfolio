@@ -14,5 +14,13 @@
     "en": "Occupied."
   },
   "order": 80,
-  "phase": 2
+  "phase": 2,
+  "plate": {
+    "he": "בפנים: יומן המנקה.",
+    "en": "Inside: the cleaner's log."
+  },
+  "tape": {
+    "he": "תפוס.",
+    "en": "Occupied."
+  }
 }

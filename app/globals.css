@@ -3,11 +3,9 @@
 /* ============================================================================
  * טוקני העיצוב של הבית. "בית בלילה עם אור בחלון."
  * ----------------------------------------------------------------------------
- * רקע לילה עמוק (לא שחור OLED), אור חם אחד שנע (lamp), צבע מבטא אחד אמיץ
- * (door, הדלת האדומה), וטיפוגרפיה עברית גדולה שלא מתביישת.
+ * גופן אחד (Heebo, מאוחסן אצלנו). לילה עמוק, נייר, אור חם אחד, ניצוץ אחד.
  * כל צבע באתר מגיע מכאן. אין hex בתוך רכיבים. לשנות פלטה = לשנות קובץ אחד.
- * ניגודיות (WCAG AA): paper על night 15:1, lamp על night 10:1,
- * night על door 5.3:1 (לכן כפתורים אדומים עם טקסט כהה, לא בהיר).
+ * `static` כדי ש-house.css יוכל להשתמש בכל משתנה, גם כזה שאין לו מחלקת Tailwind.
  * ========================================================================== */
 @font-face {
   font-family: "Heebo";
@@ -27,33 +25,27 @@
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@theme {
+@theme static {
   --font-sans: "Heebo", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Heebo", ui-sans-serif, system-ui, sans-serif;
 
-  /* הלילה: שלוש עומקים */
-  --color-night: #0f1218;
-  --color-night-2: #161a23;
-  --color-night-3: #212735;
+  --color-night: #0b0d12;
+  --color-night-2: #14171e;
+  --color-night-3: #1b1f29;
 
-  /* הנייר: טקסט */
-  --color-paper: #f4efe6;
-  --color-paper-dim: #a9a49b;
-  --color-paper-faint: #6f6b64;
+  --color-paper: #f2e9da;
+  --color-paper-dim: #b3aa9c;
+  --color-paper-faint: #857e73;
 
-  /* האור בחלון */
-  --color-lamp: #ffb547;
-  --color-lamp-soft: #ffd79a;
+  --color-lamp: #ffb042;
+  --color-lamp-soft: #ffd59a;
+  --color-door: #ff6a3d;
+  --color-brass: #c89b5a;
 
-  /* הדלת האדומה: מבטא אחד */
-  --color-door: #e8472b;
-  --color-door-deep: #b9341c;
+  --color-line: rgb(242 233 218 / 0.12);
+  --color-line-strong: rgb(242 233 218 / 0.28);
 
-  /* קווים */
-  --color-line: rgb(244 239 230 / 0.12);
-  --color-line-strong: rgb(244 239 230 / 0.28);
-
-  /* תאימות למחלקות shadcn הקיימות (button.tsx) */
+  /* תאימות לכפתור של shadcn */
   --color-background: var(--color-night);
   --color-foreground: var(--color-paper);
   --color-muted-foreground: var(--color-paper-dim);
@@ -64,29 +56,7 @@
   --radius-md: 0.6rem;
   --radius-sm: 0.35rem;
 
-  /* תנועה: דבר אחד זז בכל רגע */
-  --ease-house: cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-rise: rise 0.9s var(--ease-house) both;
-  --animate-lamp: lamp 18s ease-in-out infinite alternate;
-
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translateY(22px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes lamp {
-    from {
-      transform: translate(-8%, -6%) scale(1);
-    }
-    to {
-      transform: translate(10%, 8%) scale(1.15);
-    }
-  }
+  --ease-house: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
@@ -94,16 +64,17 @@
     color-scheme: dark;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     @apply bg-night font-sans text-paper antialiased;
+    overflow-x: clip;
     text-rendering: optimizeLegibility;
   }
 
-  /* מסגרת מיקוד אחת לכל מה שלוחצים עליו. נגישות קודם, בלי להמציא צבעים */
+  .font-display {
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
@@ -115,17 +86,12 @@
     border-radius: 6px;
   }
 
-  .font-display {
-    font-weight: 900;
-    letter-spacing: -0.03em;
-  }
-
   ::selection {
     background: var(--color-lamp);
     color: var(--color-night);
   }
 
-  /* מי שביקש פחות תנועה מקבל פחות תנועה. כולל האור בחלון. */
+  /* מי שביקש פחות תנועה מקבל פחות תנועה. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -139,21 +105,6 @@
 }
 
 @layer components {
-  /* האור בחלון: כתם חם אחד שנע לאט מאחורי הכניסה */
-  .lamp-glow {
-    position: absolute;
-    inset: -20%;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse 42% 38% at 70% 30%,
-      rgb(255 181 71 / 0.22),
-      transparent 70%
-    );
-    animation: var(--animate-lamp);
-    will-change: transform;
-  }
-
-  /* קישור "דלג לתוכן" לקוראי מסך ולמקלדת */
   .skip-link {
     position: absolute;
     inset-inline-start: 1rem;

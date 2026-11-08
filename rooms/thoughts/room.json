@@ -14,5 +14,13 @@
     "en": "What I send from my phone. The line connects soon."
   },
   "order": 40,
-  "phase": 1
+  "phase": 1,
+  "plate": {
+    "he": "מה שאני שולח מהטלפון.",
+    "en": "What I send from my phone."
+  },
+  "tape": {
+    "he": "בקרוב",
+    "en": "Soon"
+  }
 }

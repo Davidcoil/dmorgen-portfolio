@@ -389,7 +389,7 @@ export const en: Dictionary = {
     skipToContent: "Skip to content",
     skipQuestion: "Skip to the map",
     entrance: {
-      title: "There are no unphotogenic people.",
+      titleLines: ["There are no", "unphotogenic people"],
       subtitle: "Only people who haven't felt good in front of a camera yet.",
       question: "Why did you come? It changes what you'll see.",
       photoAlt: "David Morgenstern laughing behind the camera in afternoon light",
@@ -436,11 +436,10 @@ export const en: Dictionary = {
     },
     map: {
       title: "The house",
-      subtitle: "Open rooms, locked doors, and what is still being built.",
+      walk: "Scroll to walk",
       open: "Open",
       locked: "Locked",
       soon: "Soon",
-      enter: "Enter",
     },
     door: {
       closed: "The door is closed.",

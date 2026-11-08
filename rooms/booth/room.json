@@ -14,5 +14,10 @@
     "en": "A camera, a light, and a pose coach. Soon."
   },
   "order": 30,
-  "phase": 1
+  "phase": 1,
+  "plate": {
+    "he": "מצלמה, אור ומאמן פוזות.",
+    "en": "A camera, light and a pose coach."
+  },
+  "inside": "/images/galleries/business/headshot-doctor-woman.jpg"
 }

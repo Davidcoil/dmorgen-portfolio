@@ -40,6 +40,12 @@ test("every open room has a room.tsx component", () => {
   }
 });
 
+test("every photo behind a door exists", () => {
+  for (const r of loadRooms()) {
+    if (r.inside) assert.ok(fs.existsSync(path.join(ROOT, "public", r.inside)), `rooms/${r.slug}: ${r.inside} not found`);
+  }
+});
+
 test("the validator rejects a broken room", () => {
   assert.throws(() => validateRoom({ slug: "x", door: "open" }, "x"));
   assert.throws(() => validateRoom({ slug: "wall", name: { he: "א", en: "a" }, summary: { he: "א", en: "a" }, door: "locked", order: 1, phase: 1 }, "wall"), /sign/);

@@ -14,5 +14,10 @@
     "en": "What people wrote afterwards. Opening soon."
   },
   "order": 20,
-  "phase": 1
+  "phase": 1,
+  "plate": {
+    "he": "מה שאנשים כתבו אחרי.",
+    "en": "What people wrote afterwards."
+  },
+  "inside": "/images/galleries/family/tower-of-david-hug.jpg"
 }

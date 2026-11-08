@@ -14,5 +14,10 @@
     "en": "Four galleries. Opening in the coming days."
   },
   "order": 10,
-  "phase": 1
+  "phase": 1,
+  "plate": {
+    "he": "ארבע גלריות. אנשים אמיתיים.",
+    "en": "Four galleries. Real people."
+  },
+  "inside": "/images/galleries/events/barmitzva-party-4.jpg"
 }

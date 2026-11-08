@@ -7,9 +7,8 @@ import type { Room } from "@/lib/rooms/schema.ts";
 export function ClosedDoor({ lang, dict, room }: { lang: Locale; dict: Dictionary; room: Room }) {
   const t = dict.house;
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="lamp-glow" aria-hidden />
-      <div className="relative mx-auto max-w-3xl px-5 pt-32 pb-24 md:pt-44">
+    <section>
+      <div className="mx-auto max-w-3xl px-5 pt-32 pb-24 md:pt-44">
         <p className="text-sm font-bold tracking-widest text-door">{t.map[room.door]}</p>
         <h1 className="mt-3 font-display text-5xl text-paper md:text-7xl">{room.name[lang]}</h1>
         <p className="mt-8 max-w-xl font-display text-2xl leading-snug text-lamp-soft md:text-3xl">

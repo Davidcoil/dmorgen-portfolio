@@ -11,7 +11,8 @@ export function HouseFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) 
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-12 text-sm text-paper-dim md:flex-row md:items-start md:justify-between">
         <div className="space-y-2">
-          <p className="font-display text-lg text-paper">{t.address}</p>
+          <p className="font-display text-3xl text-paper">{dict.house.entrance.signature}</p>
+          <p className="text-base text-paper">{t.address}</p>
           <p>{t.cookies}</p>
           <p>{t.ai}</p>
         </div>

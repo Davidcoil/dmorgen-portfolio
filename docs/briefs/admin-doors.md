@@ -9,7 +9,7 @@
 - `app/admin/page.tsx`, `app/admin/login/page.tsx`, `app/admin/actions.ts` (server actions), `app/auth/callback/route.ts`
 - `lib/supabase/auth.ts` (חדש): `requireOwner()` שבודק שהמשתמש המחובר הוא `ADMIN_EMAIL` (משתנה סביבה), אחרת 404 (לא 403: העמוד לא קיים עבור אחרים).
 - `lib/rooms/doors.ts` (חדש): `getDoor(slug)` = דריסה מ-`doors` אם קיימת, אחרת `room.json`. **הרישום (`registry.ts`) לא משתנה.**
-- `app/[lang]/[room]/page.tsx` ו-`components/house/map.tsx`: להשתמש ב-`getDoor` במקום `room.door` ישירות (שינוי של שורה בכל אחד)
+- `app/[lang]/[room]/page.tsx` ו-`components/house/hallway.tsx`: להשתמש ב-`getDoor` במקום `room.door` ישירות (שינוי של שורה בכל אחד)
 - `proxy.ts`: `/admin` ו-`/auth` מחוץ לניתוב השפות
 - `tests/doors.test.ts`: לוגיקת הדריסה כפונקציה טהורה
 

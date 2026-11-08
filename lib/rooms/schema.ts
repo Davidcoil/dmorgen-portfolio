@@ -15,6 +15,12 @@ export interface Room {
   name: Localized;
   /** התאום הטקסטואלי הקצר: meta description, llms.txt, המפה */
   summary: Localized;
+  /** השורה הקצרה על השלט שבולט מהקיר במסדרון */
+  plate: Localized;
+  /** פתק שמודבק על הדלת ("בקרוב", "תפוס.") */
+  tape?: Localized;
+  /** תמונה שרואים מאחורי הדלת כשהיא נפתחת. דלת נעולה לעולם לא נפתחת */
+  inside?: string;
   door: DoorState;
   /** השלט על הדלת כשהיא לא פתוחה. חובה ל-locked ו-soon */
   sign?: Localized;
@@ -81,6 +87,13 @@ export function validateRoom(raw: unknown, folder: string): Room {
     } else fail(folder, `"unlock" has the wrong shape`);
   }
 
+  const plate = localized(folder, "plate", r.plate, 60);
+  const tape = r.tape === undefined ? undefined : localized(folder, "tape", r.tape, 30);
+  if (r.inside !== undefined && (typeof r.inside !== "string" || !r.inside.startsWith("/images/"))) {
+    fail(folder, `"inside" must be a path under /images/`);
+  }
+  const inside = r.inside as string | undefined;
+
   if (typeof r.order !== "number" || !Number.isInteger(r.order)) {
     fail(folder, `"order" must be an integer`);
   }
@@ -88,12 +101,12 @@ export function validateRoom(raw: unknown, folder: string): Room {
 
   const home = r.home === true;
 
-  const allowed = new Set(["slug", "name", "summary", "door", "sign", "unlock", "order", "phase", "home"]);
+  const allowed = new Set(["slug", "name", "summary", "plate", "tape", "inside", "door", "sign", "unlock", "order", "phase", "home"]);
   for (const key of Object.keys(r)) {
     if (!allowed.has(key)) fail(folder, `unknown field "${key}"`);
   }
 
-  return { slug: folder, name, summary, door, sign, unlock, order: r.order, phase: r.phase, home };
+  return { slug: folder, name, summary, plate, tape, inside, door, sign, unlock, order: r.order, phase: r.phase, home };
 }
 
 /** בדיקות על האוסף כולו: בדיוק כניסה אחת, סדר ייחודי. */

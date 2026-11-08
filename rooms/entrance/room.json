@@ -11,5 +11,9 @@
   "door": "open",
   "order": 0,
   "phase": 1,
-  "home": true
+  "home": true,
+  "plate": {
+    "he": "למה באת?",
+    "en": "Why did you come?"
+  }
 }

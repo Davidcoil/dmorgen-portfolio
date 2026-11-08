@@ -14,5 +14,13 @@
     "en": "What I build, and what worked. Soon."
   },
   "order": 60,
-  "phase": 1
+  "phase": 1,
+  "plate": {
+    "he": "מה אני בונה, ומה עבד.",
+    "en": "What I build, and what worked."
+  },
+  "tape": {
+    "he": "בקרוב",
+    "en": "Soon"
+  }
 }
