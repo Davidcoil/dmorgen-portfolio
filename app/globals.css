@@ -1,83 +1,80 @@
 @import "tailwindcss";
 
 /* ============================================================================
- * Design tokens — "עריכתי פרימיום": דף נייר חם · דיו עמוק · זהב מאופק.
- * דיספליי גיאומטרי לכותרות (Secular One) · סנס שקט לגוף (Rubik).
- * עקרון: הלקוח במרכז, הטקסט לא נלחם בתמונה, ריווח נדיב, קווים דקים.
+ * טוקני העיצוב של הבית. "בית בלילה עם אור בחלון."
+ * ----------------------------------------------------------------------------
+ * רקע לילה עמוק (לא שחור OLED), אור חם אחד שנע (lamp), צבע מבטא אחד אמיץ
+ * (door, הדלת האדומה), וטיפוגרפיה עברית גדולה שלא מתביישת.
+ * כל צבע באתר מגיע מכאן. אין hex בתוך רכיבים. לשנות פלטה = לשנות קובץ אחד.
+ * ניגודיות (WCAG AA): paper על night 15:1, lamp על night 10:1,
+ * night על door 5.3:1 (לכן כפתורים אדומים עם טקסט כהה, לא בהיר).
  * ========================================================================== */
 @theme {
-  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
-  --font-display: var(--font-secular), "Heebo", "Arial", sans-serif;
+  --font-display: var(--font-display), "Arial Black", sans-serif;
 
-  --color-background: #faf6ec; /* נייר חם */
-  --color-foreground: #1d1812; /* דיו */
+  /* הלילה: שלוש עומקים */
+  --color-night: #0f1218;
+  --color-night-2: #161a23;
+  --color-night-3: #212735;
 
-  --color-card: #fffdf7;
-  --color-card-foreground: #1d1812;
-  --color-popover: #fffdf7;
-  --color-popover-foreground: #1d1812;
+  /* הנייר: טקסט */
+  --color-paper: #f4efe6;
+  --color-paper-dim: #a9a49b;
+  --color-paper-faint: #6f6b64;
 
-  --color-primary: #a8823f; /* זהב מאופק */
-  --color-primary-foreground: #faf6ec;
+  /* האור בחלון */
+  --color-lamp: #ffb547;
+  --color-lamp-soft: #ffd79a;
 
-  /* סקאלת שמפניה — מבטאים עדינים בלבד */
-  --color-champagne-100: #f6efdd;
-  --color-champagne-200: #eadcbd;
-  --color-champagne-300: #d9c08d;
-  --color-champagne-400: #c2a05e;
-  --color-champagne-500: #a8823f;
-  --color-champagne-600: #7d5f2e;
-  --color-champagne-700: #5f4822;
+  /* הדלת האדומה: מבטא אחד */
+  --color-door: #e8472b;
+  --color-door-deep: #b9341c;
 
-  --color-secondary: #f1e9d4;
-  --color-secondary-foreground: #1d1812;
-  --color-muted: #f3eddc;
-  --color-muted-foreground: #857462;
-  --color-accent: #a8823f;
-  --color-accent-foreground: #faf6ec;
+  /* קווים */
+  --color-line: rgb(244 239 230 / 0.12);
+  --color-line-strong: rgb(244 239 230 / 0.28);
 
-  --color-espresso: #201a13;
-  --color-espresso-soft: #2e261c;
+  /* תאימות למחלקות shadcn הקיימות (button.tsx) */
+  --color-background: var(--color-night);
+  --color-foreground: var(--color-paper);
+  --color-muted-foreground: var(--color-paper-dim);
+  --color-ring: var(--color-lamp);
+  --color-border: var(--color-line);
 
-  --color-border: #e7dcc2; /* קו שיער */
-  --color-input: #e7dcc2;
-  --color-ring: #a8823f;
+  --radius-lg: 1rem;
+  --radius-md: 0.6rem;
+  --radius-sm: 0.35rem;
 
-  --color-destructive: #c04545;
-  --color-destructive-foreground: #faf6ec;
+  /* תנועה: דבר אחד זז בכל רגע */
+  --ease-house: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-rise: rise 0.9s var(--ease-house) both;
+  --animate-lamp: lamp 18s ease-in-out infinite alternate;
 
-  --radius-lg: 0.6rem;
-  --radius-md: 0.45rem;
-  --radius-sm: 0.3rem;
-
-  /* תנועה עדינה עם כוונה — שום דבר לקישוט */
-  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-fade-in: fade-in 1.4s ease both;
-
-  @keyframes fade-up {
+  @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(22px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  @keyframes fade-in {
+  @keyframes lamp {
     from {
-      opacity: 0;
+      transform: translate(-8%, -6%) scale(1);
     }
     to {
-      opacity: 1;
+      transform: translate(10%, 8%) scale(1.15);
     }
   }
 }
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   html {
@@ -85,39 +82,68 @@
   }
 
   body {
-    @apply bg-background font-sans text-foreground antialiased;
+    @apply bg-night font-sans text-paper antialiased;
     text-rendering: optimizeLegibility;
-    letter-spacing: 0.005em;
   }
 
-  /* מסגרת מיקוד אחידה לכל האינטראקטיביים — נגישות בלי להמציא צבעים */
+  /* מסגרת מיקוד אחת לכל מה שלוחצים עליו. נגישות קודם, בלי להמציא צבעים */
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
   select:focus-visible,
-  textarea:focus-visible {
-    outline: 2px solid var(--color-ring);
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--color-lamp);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
 
   ::selection {
-    background: #a8823f;
-    color: #faf6ec;
+    background: var(--color-lamp);
+    color: var(--color-night);
   }
 
-  ::-webkit-scrollbar {
-    width: 10px;
+  /* מי שביקש פחות תנועה מקבל פחות תנועה. כולל האור בחלון. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
-  ::-webkit-scrollbar-track {
-    background: #f1e9d4;
+}
+
+@layer components {
+  /* האור בחלון: כתם חם אחד שנע לאט מאחורי הכניסה */
+  .lamp-glow {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 42% 38% at 70% 30%,
+      rgb(255 181 71 / 0.22),
+      transparent 70%
+    );
+    animation: var(--animate-lamp);
+    will-change: transform;
   }
-  ::-webkit-scrollbar-thumb {
-    background: #d3c096;
-    border-radius: 8px;
-    border: 2px solid #f1e9d4;
+
+  /* קישור "דלג לתוכן" לקוראי מסך ולמקלדת */
+  .skip-link {
+    position: absolute;
+    inset-inline-start: 1rem;
+    top: -100%;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: var(--color-lamp);
+    color: var(--color-night);
+    font-weight: 700;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a8823f;
+  .skip-link:focus {
+    top: 1rem;
   }
 }

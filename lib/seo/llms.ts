@@ -8,25 +8,22 @@
 
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
+import { getRooms } from "@/lib/rooms/registry.ts";
 import { cleanSeoText } from "./text";
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com").replace(/\/$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://dmorgen.com").replace(/\/$/, "");
 }
 
+/* החדרים, מהרישום: פתוחים עם קישור, סגורים כשורה אחת על מה יהיה שם. */
 function pagesSection(base: string): string {
-  const pages: Array<[string, string]> = [
-    ["עמוד הבית (עברית)", `${base}/he`],
-    ["Homepage (English)", `${base}/en`],
-    ["עבודות", `${base}/he/galleries`],
-    ["גלריית אירועים", `${base}/he/galleries/events`],
-    ["גלריית משפחה וילדים", `${base}/he/galleries/family`],
-    ["פורטרטים", `${base}/he/galleries/portraits`],
-    ["תדמית לעסקים", `${base}/he/galleries/business`],
-    ["על דוד", `${base}/he/about`],
-    ["דברו איתי", `${base}/he/contact`],
-  ];
-  return pages.map(([label, url]) => `- [${label}](${url})`).join("\n");
+  return getRooms()
+    .map((r) => {
+      const url = r.home ? `${base}/he` : `${base}/he/${r.slug}`;
+      const state = r.door === "open" ? "" : ` (${r.door})`;
+      return `- [${r.name.he} / ${r.name.en}](${url})${state}: ${cleanSeoText(r.summary.en)}`;
+    })
+    .join("\n");
 }
 
 function faqSection(dict: Dictionary): string {
@@ -74,7 +71,7 @@ export async function buildLlmsTxt(): Promise<string> {
     "- Phone / WhatsApp: +972-52-555-5970",
     `- Website: ${base}`,
     "",
-    "## Pages",
+    "## Rooms of the house (dmorgen.com is built as a house: open rooms, locked doors, rooms still being built)",
     pagesSection(base),
     "",
     "## FAQ",
@@ -105,7 +102,7 @@ export async function buildLlmsFullTxt(): Promise<string> {
         `### ${cleanSeoText(cat.title)}`,
         `${cleanSeoText(cat.description)}`,
         `${cleanSeoText(catEn.title)}: ${cleanSeoText(catEn.description)}`,
-        `${base}/he/galleries/${slug}`,
+        `${base}/he/galleries`,
         "",
       ].join("\n");
     })

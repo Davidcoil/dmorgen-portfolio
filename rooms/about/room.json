@@ -1,0 +1,18 @@
+{
+  "slug": "about",
+  "name": {
+    "he": "מאחורי הקלעים",
+    "en": "Behind the Scenes"
+  },
+  "summary": {
+    "he": "מי זה דוד, מה הוא בונה, ואיפה הוא נכשל קודם. הכישלון של האלבומים, המכונות שעובדות, ומשפט אחד על להיות אבא.",
+    "en": "Who David is, what he builds, and where he failed first. The album failure, the machines that work, and one sentence about being a dad."
+  },
+  "door": "soon",
+  "sign": {
+    "he": "פה אני מראה מה אני בונה. חלק מזה עובד. החלק שעובד עובד גם בשבילכם.",
+    "en": "This is where I show what I build. Some of it works. The part that works, works for you too."
+  },
+  "order": 60,
+  "phase": 1
+}

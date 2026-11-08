@@ -29,3 +29,6 @@ Thumbs.db
 # working materials — not deployed
 source-photos/
 qa/
+
+.vercel
+.env*

@@ -1,40 +1,29 @@
+import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
-import { Hero } from "@/components/home/hero";
-import { TrustStrip } from "@/components/home/trust-strip";
-import { CategoryTabs } from "@/components/home/category-tabs";
-import { ValueProps } from "@/components/home/value-props";
-import { HowItWorks } from "@/components/home/how-it-works";
-import { Wall } from "@/components/home/wall";
-import { Corporate } from "@/components/home/corporate";
-import { AboutTeaser } from "@/components/home/about-teaser";
-import { CtaSection } from "@/components/home/cta-section";
+import { getDoors, getHomeRoom } from "@/lib/rooms/registry.ts";
+import { HouseMap } from "@/components/house/map";
+import { resolveLocale } from "./layout";
+import EntranceRoom from "@/rooms/entrance/room";
 
-/* דף הבית: הירו טיפוגרפי → רצועת ביטחון → סיפורי לקוחות → ערכים →
-   איך זה עובד → מסלול קורפורייט → טיזר אישי → סגירה שקטה.
-   עקרון: הלקוח הוא הגיבור; שום טקסט לא יושבת על פרצוף. */
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+type LangParams = { params: Promise<{ lang: string }> };
+
+/* דף הבית = חדר הכניסה + המפה. שניהם נגזרים מהרישום. */
+export async function generateMetadata({ params }: LangParams): Promise<Metadata> {
   const { lang } = await params;
-  const locale: Locale = (locales as readonly string[]).includes(lang)
-    ? (lang as Locale)
-    : defaultLocale;
+  const locale = resolveLocale(lang);
+  const home = getHomeRoom();
+  return { description: home.summary[locale] };
+}
+
+export default async function HomePage({ params }: LangParams) {
+  const { lang } = await params;
+  const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
 
   return (
     <>
-      <Hero lang={locale} dict={dict} />
-      <TrustStrip dict={dict} />
-      <CategoryTabs lang={locale} dict={dict} />
-      <ValueProps dict={dict} />
-      <Wall dict={dict} limit={6} />
-      <HowItWorks dict={dict} />
-      <Corporate lang={locale} dict={dict} />
-      <AboutTeaser lang={locale} dict={dict} />
-      <CtaSection lang={locale} dict={dict} />
+      <EntranceRoom lang={locale} dict={dict} />
+      <HouseMap lang={locale} dict={dict} rooms={getDoors()} />
     </>
   );
 }

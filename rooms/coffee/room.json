@@ -1,0 +1,18 @@
+{
+  "slug": "coffee",
+  "name": {
+    "he": "חדר הקפה",
+    "en": "The Coffee Room"
+  },
+  "summary": {
+    "he": "פעם בשבוע דוד שותה קפה עם מישהו שעוד לא הכיר. לא על עסקים, אלא אם זה יוצא ככה. כדי לדפוק בדלת עונים על שאלה אחת.",
+    "en": "Once a week David has coffee with someone he has not met yet. Not about business, unless it goes there. To knock, answer one question."
+  },
+  "door": "locked",
+  "sign": {
+    "he": "פעם בשבוע אני שותה קפה עם מישהו שעוד לא הכרתי. הדלת נפתחת כשהבית נפתח.",
+    "en": "Once a week I have coffee with someone I have not met yet. This door opens when the house opens."
+  },
+  "order": 70,
+  "phase": 2
+}

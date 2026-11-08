@@ -1,0 +1,18 @@
+{
+  "slug": "booth",
+  "name": {
+    "he": "חדר הצילום",
+    "en": "The Photo Booth"
+  },
+  "summary": {
+    "he": "מצלמת הדפדפן, אור, ומאמן פוזות שרץ על המכשיר שלכם. יוצאים עם תמונה אחת, מסגרת, ותמונת שיתוף אישית. חינם, בלי הרשמה.",
+    "en": "Your browser camera, light, and a pose coach that runs on your device. You leave with one photo, a frame and a personal share image. Free, no sign-up."
+  },
+  "door": "soon",
+  "sign": {
+    "he": "מצלמה, אור, ומישהו שאומר לך איפה לשים את הידיים. עוד רגע.",
+    "en": "A camera, a light, and someone telling you where to put your hands. Almost ready."
+  },
+  "order": 30,
+  "phase": 1
+}

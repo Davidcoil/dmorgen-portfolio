@@ -1,0 +1,18 @@
+{
+  "slug": "toilets",
+  "name": {
+    "he": "השירותים",
+    "en": "The Restroom"
+  },
+  "summary": {
+    "he": "כן, שירותים. בפנים: יומן המנקה, עם כל מה שאנשים השאירו בבית בלילה.",
+    "en": "Yes, a restroom. Inside: the cleaner's log, with everything people left in the house overnight."
+  },
+  "door": "locked",
+  "sign": {
+    "he": "תפוס.",
+    "en": "Occupied."
+  },
+  "order": 80,
+  "phase": 2
+}

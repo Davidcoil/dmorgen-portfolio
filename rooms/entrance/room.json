@@ -1,0 +1,15 @@
+{
+  "slug": "entrance",
+  "name": {
+    "he": "הכניסה",
+    "en": "The Entrance"
+  },
+  "summary": {
+    "he": "הבית של דוד מורגנשטרן. אין אנשים לא פוטוגניים, יש אנשים שעוד לא הרגישו טוב מול מצלמה. תגידו למה באתם, והבית יסתדר בהתאם.",
+    "en": "The house of David Morgenstern. There are no unphotogenic people, only people who have not felt good in front of a camera yet. Say why you came and the house rearranges itself."
+  },
+  "door": "open",
+  "order": 0,
+  "phase": 1,
+  "home": true
+}

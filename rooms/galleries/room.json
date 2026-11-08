@@ -1,0 +1,18 @@
+{
+  "slug": "galleries",
+  "name": {
+    "he": "הגלריה",
+    "en": "The Gallery"
+  },
+  "summary": {
+    "he": "ארבע גלריות, תמונות אמיתיות של אנשים אמיתיים: אירועים, משפחה, פורטרטים ועסקים. בכל אחת שורה אחת על מה ראיתי שם.",
+    "en": "Four galleries of real people: events, family, portraits and business. Each with one line about what I saw there."
+  },
+  "door": "soon",
+  "sign": {
+    "he": "התמונות כבר פה. הקירות עוד נצבעים.",
+    "en": "The photos are here. The walls are still being painted."
+  },
+  "order": 10,
+  "phase": 1
+}

@@ -384,4 +384,73 @@ export const en: Dictionary = {
   common: {
     loading: "One sec, fixing the light.",
   },
+  house: {
+    name: "David's House",
+    skipToContent: "Skip to content",
+    skipQuestion: "Skip, just show me the house",
+    entrance: {
+      title: "There are no unphotogenic people.",
+      subtitle: "Only people who haven't felt good in front of a camera yet.",
+      question: "Before I show you photos, tell me why you came. It changes what you'll see.",
+      photoAlt: "David Morgenstern laughing behind the camera in afternoon light",
+      returning: "You're back. I kept what you were looking at.",
+      changeAnswer: "Actually, I came for something else",
+      paths: [
+        {
+          id: "simcha",
+          label: "We have a celebration and I want it to look the way it felt",
+          reply: "First thing: who in the family is sure they're not photogenic? Bring them first. I like a challenge.",
+          cta: "To the gallery",
+          room: "galleries",
+        },
+        {
+          id: "business",
+          label: "I have a business, and on Google I look like a passport photo",
+          reply: "Have you googled yourself? Probably not. Your clients have, and what they found decided before you opened your mouth.",
+          cta: "To the counter",
+          room: "contact",
+        },
+        {
+          id: "ai",
+          label: "I'm building something and want to talk AI",
+          reply: "Good. You've reached the part of the house I love most and the fewest people click on.",
+          cta: "Behind the scenes",
+          room: "about",
+        },
+        {
+          id: "looking",
+          label: "Just looking",
+          reply: "Perfect. That's how I start too.",
+          cta: "To the gallery",
+          room: "galleries",
+        },
+        {
+          id: "coffee",
+          label: "I came for coffee",
+          reply: "Once a week I have coffee with someone I haven't met yet. The door is right there, end of the hall.",
+          cta: "To the coffee door",
+          room: "coffee",
+        },
+      ],
+      signature: "A good photo starts with feeling good.",
+    },
+    map: {
+      title: "The house",
+      subtitle: "Open rooms, locked doors, and things still being built. A real house takes time, and that's fine.",
+      open: "Open",
+      locked: "Locked",
+      soon: "Soon",
+      enter: "Enter",
+    },
+    door: {
+      closed: "The door is closed.",
+      back: "Back to the entrance",
+    },
+    footer: {
+      address: "Jerusalem is the address. The world is the location.",
+      ai: "Written by David and by AI. David did the funny parts.",
+      cookies: "No cookies here. Albums, yes.",
+      whatsapp: "WhatsApp",
+    },
+  },
 };

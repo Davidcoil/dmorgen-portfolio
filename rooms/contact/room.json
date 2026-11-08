@@ -1,0 +1,18 @@
+{
+  "slug": "contact",
+  "name": {
+    "he": "הדלפק",
+    "en": "The Counter"
+  },
+  "summary": {
+    "he": "העוזר, שלוש הצעות, קופה ווואטסאפ. מקום אחד לדבר, לשאול ולסגור תאריך.",
+    "en": "The assistant, three offers, checkout and WhatsApp. One place to talk, ask and lock a date."
+  },
+  "door": "soon",
+  "sign": {
+    "he": "הדלפק עוד בהרכבה. בינתיים אני בוואטסאפ, שם אני תמיד עובד.",
+    "en": "The counter is still being assembled. Meanwhile I am on WhatsApp, where I always work."
+  },
+  "order": 50,
+  "phase": 1
+}

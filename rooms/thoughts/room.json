@@ -1,0 +1,18 @@
+{
+  "slug": "thoughts",
+  "name": {
+    "he": "חדר המחשבות",
+    "en": "The Thoughts Room"
+  },
+  "summary": {
+    "he": "מה שדוד שולח מהטלפון: מחשבה אחת על אנשים, תמונה אחת, דבר אחד שבנה. הארכיון של \"ראיתי משהו\".",
+    "en": "What David sends from his phone: one thought about people, one photo, one thing he built. The archive of \"I saw something\"."
+  },
+  "door": "soon",
+  "sign": {
+    "he": "מה שאני שולח מהטלפון בשתיים בלילה. הקו עוד לא מחובר.",
+    "en": "What I send from my phone at 2am. The line is not connected yet."
+  },
+  "order": 40,
+  "phase": 1
+}

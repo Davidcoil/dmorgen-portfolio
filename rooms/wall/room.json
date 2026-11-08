@@ -1,0 +1,18 @@
+{
+  "slug": "wall",
+  "name": {
+    "he": "הקיר",
+    "en": "The Wall"
+  },
+  "summary": {
+    "he": "ספר אורחים חי. מה שאנשים כתבו אחרי האירוע, חותמות של מבקרים, וביקורות מגוגל שנכנסות לבד.",
+    "en": "A living guestbook. What people wrote after their event, marks left by visitors, and Google reviews that arrive on their own."
+  },
+  "door": "soon",
+  "sign": {
+    "he": "כאן כותבים אחרי. הציטוטים כבר מחכים בצד, הטיח עוד רטוב.",
+    "en": "This is where people write afterwards. The quotes are waiting; the plaster is still wet."
+  },
+  "order": 20,
+  "phase": 1
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "basement",
+  "name": {
+    "he": "המרתף",
+    "en": "The Basement"
+  },
+  "summary": {
+    "he": "המעבדה. מה דוד בונה עם AI, מונים חיים, ומה עוד לא עובד. נפתח למי שהשאיר חותם על הקיר.",
+    "en": "The lab. What David builds with AI, live counters, and what does not work yet. Opens for those who left a mark on the wall."
+  },
+  "door": "locked",
+  "unlock": "marked",
+  "sign": {
+    "he": "יש שם דברים שעובדים. ייפתח למי שישאיר חותם על הקיר למעלה.",
+    "en": "There are things down there that work. It opens for whoever leaves a mark on the wall upstairs."
+  },
+  "order": 90,
+  "phase": 3
+}

@@ -1,1 +1,34 @@
-{"dependencies":{"@radix-ui/react-slot":"^1.3.3","class-variance-authority":"^0.7.0","clsx":"^2.0.0","framer-motion":"^13.4.4","lucide-react":"^1.48.0","next":"^16.3.6","react":"^19.3.0","react-dom":"^19.3.0","tailwind-merge":"^3.0.0"},"description":"High-end portfolio website for David Morgenstern — premium family & event photography. Hebrew RTL source, i18n-ready, Vercel-ready.","devDependencies":{"@tailwindcss/postcss":"^4.3.3","@types/node":"^22.0.0","@types/react":"^19.0.0","@types/react-dom":"^19.0.0","tailwindcss":"^4.3.3","typescript":"^5.7.0"},"name":"david-morgenstern-photography","private":true,"scripts":{"build":"next build","dev":"next dev","start":"next start"},"version":"0.1.0"}
+{
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.3.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "framer-motion": "^13.4.4",
+    "lucide-react": "^1.48.0",
+    "next": "^16.3.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.0.0"
+  },
+  "description": "The house of David Morgenstern at dmorgen.com. Hebrew RTL first, English mirrored. See CONTRIBUTING.md before touching anything.",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.0"
+  },
+  "name": "dmorgen-house",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "budget": "node scripts/budget.mjs",
+    "check": "npm run typecheck && npm test && npm run build && npm run budget"
+  },
+  "version": "0.1.0"
+}
