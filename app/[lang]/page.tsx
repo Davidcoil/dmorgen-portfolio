@@ -5,6 +5,7 @@ import { TrustStrip } from "@/components/home/trust-strip";
 import { CategoryTabs } from "@/components/home/category-tabs";
 import { ValueProps } from "@/components/home/value-props";
 import { HowItWorks } from "@/components/home/how-it-works";
+import { Wall } from "@/components/home/wall";
 import { Corporate } from "@/components/home/corporate";
 import { AboutTeaser } from "@/components/home/about-teaser";
 import { CtaSection } from "@/components/home/cta-section";
@@ -29,6 +30,7 @@ export default async function HomePage({
       <TrustStrip dict={dict} />
       <CategoryTabs lang={locale} dict={dict} />
       <ValueProps dict={dict} />
+      <Wall dict={dict} limit={6} />
       <HowItWorks dict={dict} />
       <Corporate lang={locale} dict={dict} />
       <AboutTeaser lang={locale} dict={dict} />

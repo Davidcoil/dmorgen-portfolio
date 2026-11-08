@@ -5,6 +5,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Wall } from "@/components/home/wall";
 import { personJsonLd } from "@/lib/seo/jsonld";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { cleanSeoText } from "@/lib/seo/text";
@@ -99,6 +100,11 @@ export default async function AboutPage({ params }: LangParams) {
             <Link href={`/${locale}/contact`}>{t.cta}</Link>
           </Button>
         </div>
+      </div>
+
+      <div className="mt-24 border-t border-border pt-16">
+        <SectionHeading eyebrow={dict.home.wall.eyebrow} title={dict.home.wall.title} />
+        <Wall dict={dict} compact />
       </div>
     </div>
   );

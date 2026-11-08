@@ -139,6 +139,67 @@ export const en: Dictionary = {
       cta: "Let's talk about your business",
       waMessage: "Hi David, we have a business and we want people to see it right. Can we talk?",
     },
+    wall: {
+      eyebrow: "The wall",
+      title: "What people wrote afterwards.",
+      subtitle:
+        "Real messages I received after events and albums, in their own words. First names only; the rest stays between them and me. Hebrew messages are translated.",
+      note: "Notice what repeats? Nobody wrote \"sharp photos\". They write about patience, about how they were treated, and about the album. That's not a coincidence, and it's what I sell.",
+      items: [
+        {
+          quote:
+            "You managed to bridge a sensitivity we had with the girls, and with real skill you led us to the photo of the family hug. You didn't pounce, and you didn't panic, and you got it.",
+          who: "A father",
+          context: "after a family session",
+        },
+        {
+          quote:
+            "Four Bar Mitzvahs in our family. Besides a photographer of the highest level, we got to know an amazing person. Everyone who sees the albums is moved by their beauty and asks who the photographer is.",
+          who: "The S. family",
+          context: "Netanya",
+        },
+        {
+          quote:
+            "We've done several events and never met a photographer like you. The album is perfect, everything stylish and at a high level. We can't stop leafing through it.",
+          who: "Tzipi",
+          context: "after a Bar Mitzvah",
+        },
+        {
+          quote:
+            "Your gentleness and consideration in the craft of photography cannot be priced in money.",
+          who: "Azriel",
+          context: "",
+        },
+        {
+          quote:
+            "The album is amazing. You are very talented. You'll be the photographer for all our family events.",
+          who: "Ofra",
+          context: "",
+        },
+        {
+          quote:
+            "A lovely, thoughtful album, beautiful photos taken with a master's hand and the utmost attention. I appreciate the personal attitude and the patience with the delays on our side.",
+          who: "Yehudit",
+          context: "",
+        },
+        {
+          quote:
+            "Thank you for the special investment and the patience with a smile. For the professionalism and thoroughness down to the last detail.",
+          who: "Shani",
+          context: "",
+        },
+        {
+          quote: "The pictures are stunning! I don't know how I will be able to choose photos for an album, they are all so good.",
+          who: "Shani",
+          context: "in the original English",
+        },
+        {
+          quote: "The album is insane. Service and reliability above and beyond.",
+          who: "P.",
+          context: "2023",
+        },
+      ],
+    },
     aboutTeaser: {
       eyebrow: "Nice to meet you",
       title: "I'm David. The camera is the small part.",
