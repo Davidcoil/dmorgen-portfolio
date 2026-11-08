@@ -5,6 +5,9 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { personJsonLd } from "@/lib/seo/jsonld";
+import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { cleanSeoText } from "@/lib/seo/text";
 
 type LangParams = { params: Promise<{ lang: string }> };
 
@@ -14,13 +17,19 @@ function resolveLocale(lang: string): Locale {
     : defaultLocale;
 }
 
+/* תיאור מטא ייעודי לעמוד — קצר, עם מילות מפתח, בלי מקף ארוך. */
+const metaDescription: Record<Locale, string> = {
+  he: "דוד מורגנשטרן, צלם אירועים ומשפחה בישראל. אין אנשים לא פוטוגניים, יש אנשים שעוד לא צולמו טוב. הכירו את האדם מאחורי המצלמה.",
+  en: "David Morgenstern, events and family photographer in Israel. No unphotogenic people, only people not yet photographed well. Meet the man behind the camera.",
+};
+
 export async function generateMetadata({ params }: LangParams): Promise<Metadata> {
   const { lang } = await params;
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
   return {
     title: `${dict.nav.about} · ${dict.meta.siteName}`,
-    description: dict.about.paragraphs[0],
+    description: metaDescription[locale],
   };
 }
 
@@ -33,6 +42,12 @@ export default async function AboutPage({ params }: LangParams) {
 
   return (
     <div className="mx-auto max-w-6xl px-6 pt-36 pb-24 md:pt-44 md:pb-32">
+      <JsonLdScript
+        data={personJsonLd({
+          lang: locale,
+          description: cleanSeoText(t.paragraphs[0]),
+        })}
+      />
       <SectionHeading level="h1" eyebrow={t.eyebrow} title={t.title} />
 
       <div className="mt-14 grid items-start gap-12 md:grid-cols-5 md:gap-16">

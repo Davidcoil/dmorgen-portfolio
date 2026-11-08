@@ -22,7 +22,10 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const dict = await getDictionary(locale);
   return {
     title: `${dict.galleries.title} · ${dict.meta.siteName}`,
-    description: dict.galleries.subtitle,
+    description:
+      locale === "he"
+        ? "סיפורי לקוחות של דוד מורגנשטרן: בר ובת מצווה, בריתות, ימי הולדת, צילומי משפחה ופורטרטים. כל סיפור התחיל ביום אחד שהיה חשוב למישהו."
+        : "Client stories by David Morgenstern: Bar and Bat Mitzvah, brit ceremonies, birthdays, family shoots and portraits. Every story began with one day that mattered.",
   };
 }
 

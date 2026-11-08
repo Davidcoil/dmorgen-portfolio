@@ -14,6 +14,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaSection } from "@/components/home/cta-section";
 import { imageGalleryJsonLd } from "@/lib/seo/jsonld";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { truncateDescription } from "@/lib/seo/text";
 
 type PageParams = { params: Promise<{ lang: string; category: string }> };
 
@@ -44,7 +45,8 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const meta = dict.galleries.categories[slug];
   return {
     title: `${meta.title} · ${dict.meta.siteName}`,
-    description: `${meta.tagline} — ${meta.description}`,
+    /* תיאור הקטגוריה בלבד — השילוב עם הסלוגן חרג מ־160 תווים בכל שפה. */
+    description: truncateDescription(meta.description),
   };
 }
 

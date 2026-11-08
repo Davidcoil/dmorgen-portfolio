@@ -64,19 +64,63 @@ export function professionalServiceJsonLd({ lang, name, description }: Professio
     name,
     description,
     url: `${base}/${lang}`,
+    image: `${base}/images/og-cover.jpg`,
     telephone: "+972525555970",
-    priceRange: "₪₪",
+    priceRange: "₪₪₪",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IL",
+    },
     areaServed: {
       "@type": "Country",
       name: he ? "ישראל" : "Israel",
     },
     inLanguage: he ? "he-IL" : "en-US",
+    knowsAbout: he
+      ? ["צילום אירועים", "צילום משפחה", "צילום בר מצווה", "צילום פורטרטים", "צילום עסקי"]
+      : [
+          "Event photography",
+          "Family photography",
+          "Bar Mitzvah photography",
+          "Portrait photography",
+          "Business photography",
+        ],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+972525555970",
       contactType: "sales",
       availableLanguage: ["he", "en"],
     },
+  };
+}
+
+interface PersonInput {
+  lang: Locale;
+  description: string;
+}
+
+/** סכמת Person לעמוד "האדם מאחורי המצלמה" — מי האדם מאחורי העסק. */
+export function personJsonLd({ lang, description }: PersonInput) {
+  const base = siteUrl();
+  const he = lang === "he";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "דוד מורגנשטרן",
+    alternateName: "David Morgenstern",
+    description,
+    url: `${base}/${lang}/about`,
+    image: `${base}/images/about-david-real.jpg`,
+    telephone: "+972525555970",
+    jobTitle: he ? "צלם אירועים ומשפחה" : "Events and family photographer",
+    worksFor: {
+      "@type": "ProfessionalService",
+      name: "דוד מורגנשטרן",
+      url: `${base}/${lang}`,
+    },
+    knowsAbout: he
+      ? ["צילום אירועים", "צילום משפחה", "צילום בר מצווה"]
+      : ["Event photography", "Family photography", "Bar Mitzvah photography"],
   };
 }
 

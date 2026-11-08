@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/galleries", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/galleries/events", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/galleries/family", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/galleries/portraits", priority: 0.8, changeFrequency: "monthly" as const },

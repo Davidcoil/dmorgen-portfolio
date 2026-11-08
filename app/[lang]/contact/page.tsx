@@ -22,7 +22,10 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const dict = await getDictionary(locale);
   return {
     title: `${dict.nav.contact} · ${dict.meta.siteName}`,
-    description: dict.contact.subtitle,
+    description:
+      locale === "he"
+        ? "בואו נבדוק אם אנחנו מתאימים. ספרו לדוד מה חוגגים, בר מצווה, ברית, יום הולדת או אירוע חברה, וקבלו הצעה מסודרת בלי לחץ ובלי התחייבות."
+        : "Tell David what you're celebrating, a Bar Mitzvah, a brit, a birthday or a company event, and get a clear written quote. No pressure, no commitment.",
   };
 }
 
