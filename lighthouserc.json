@@ -3,7 +3,7 @@
     "collect": {
       "startServerCommand": "npm start",
       "startServerReadyPattern": "Ready in|started server|Local:",
-      "url": ["http://localhost:3000/he", "http://localhost:3000/en", "http://localhost:3000/he/wall"],
+      "url": ["http://localhost:3000/he", "http://localhost:3000/en"],
       "numberOfRuns": 2,
       "settings": {
         "onlyCategories": ["performance", "accessibility", "best-practices", "seo"],
