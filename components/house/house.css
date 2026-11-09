@@ -701,3 +701,305 @@ a.room:focus-visible .plate {
     display: grid;
   }
 }
+
+/* ---------- נכנסים דרך דלת: האור שהציף את המסדרון נמוג לתוך החדר ---------- */
+.arrive {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, #fff1d6, var(--color-lamp) 40%, var(--color-night) 85%);
+}
+[data-door] .arrive {
+  display: block;
+  animation: arrive-fade 0.8s var(--ease-house) both;
+}
+@keyframes arrive-fade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ---------- הגלריה ---------- */
+.gal {
+  padding-block: clamp(96px, 14vh, 150px) clamp(60px, 10vh, 120px);
+  padding-inline: clamp(16px, 2vw, 40px);
+}
+.gal-title {
+  font-weight: 900;
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+  letter-spacing: -0.02em;
+  color: var(--color-paper-dim);
+  padding-inline: clamp(4px, 2.5vw, 24px);
+}
+.walls {
+  position: relative;
+  list-style: none;
+  margin-top: clamp(20px, 4vh, 44px);
+}
+.wall-link {
+  display: block;
+  padding: clamp(10px, 1.6vh, 18px) clamp(4px, 2.5vw, 24px);
+}
+.wall-link b {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(3.2rem, 9.6vw, 10rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  transition: color 0.4s var(--ease-house);
+}
+.wall-link small {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  color: var(--color-paper-dim);
+}
+.wall-cover {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.wall-cover img {
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+@media (hover: hover) and (min-width: 901px) {
+  .wall-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    inset-inline-end: 0;
+    width: 46%;
+    aspect-ratio: auto;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-house);
+    pointer-events: none;
+  }
+  .wall-link b {
+    font-size: clamp(3.2rem, 6.4vw, 7.4rem);
+  }
+  .walls:not(:hover):not(:focus-within) li:first-child .wall-cover,
+  .walls li:hover .wall-cover,
+  .walls li:focus-within .wall-cover {
+    opacity: 1;
+  }
+  .walls:hover li:not(:hover) b {
+    color: var(--color-paper-faint);
+  }
+  .walls li:hover b {
+    color: var(--color-lamp-soft);
+  }
+}
+
+.gal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-paper-dim);
+  padding-inline: clamp(4px, 2.5vw, 24px);
+}
+.gal-nav a {
+  padding-block: 6px;
+}
+.gal-nav a:hover {
+  color: var(--color-paper);
+}
+.gal-nav a[aria-current] {
+  color: var(--color-lamp);
+}
+.gal-head {
+  padding-inline: clamp(4px, 2.5vw, 24px);
+  margin-top: clamp(20px, 5vh, 56px);
+  margin-bottom: clamp(44px, 9vh, 100px);
+}
+.gal-head h1 {
+  font-weight: 900;
+  font-size: clamp(3.2rem, 10vw, 10.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+.gal-head p {
+  margin-top: clamp(14px, 2.4vh, 26px);
+  max-width: 40ch;
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+  line-height: 1.38;
+  color: var(--color-paper-dim);
+}
+
+.hang {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-width: 1500px;
+  margin-inline: auto;
+}
+.pic button {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--color-night-2);
+  cursor: zoom-in;
+}
+.pic img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* האור הולך איתך: תמונה שבמרכז המסך דולקת, והשאר מחכות בעמעום. */
+@supports (animation-timeline: view()) {
+  .pic button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-night);
+    pointer-events: none;
+    animation: pic-light linear both;
+    animation-timeline: view();
+  }
+  @keyframes pic-light {
+    0% {
+      opacity: 0.72;
+    }
+    34%,
+    66% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.72;
+    }
+  }
+}
+@media (min-width: 901px) {
+  .hang {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(12px, 1.6vw, 28px);
+    row-gap: clamp(56px, 11vh, 130px);
+  }
+  .pic {
+    grid-column: var(--col);
+    grid-row: var(--row);
+  }
+  .pic.drop {
+    margin-top: clamp(60px, 16vh, 190px);
+  }
+}
+
+.gal-end {
+  max-width: 1500px;
+  margin: clamp(70px, 14vh, 170px) auto 0;
+  padding-inline: clamp(4px, 2.5vw, 24px);
+}
+.gal-end blockquote {
+  max-width: 24ch;
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.6vw, 3.4rem);
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+}
+.gal-end cite {
+  display: block;
+  margin-top: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  color: var(--color-paper-dim);
+}
+.gal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-top: clamp(24px, 6vh, 64px);
+}
+.gal-next {
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.gal-next:hover {
+  color: var(--color-lamp-soft);
+}
+.gal-next small {
+  display: block;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0;
+  color: var(--color-paper-dim);
+  margin-bottom: 6px;
+}
+
+/* ---------- תצוגה מוגדלת ---------- */
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: var(--color-paper);
+  z-index: 90;
+}
+.lightbox::backdrop {
+  background: #000;
+}
+.lb-img {
+  object-fit: contain;
+}
+.lb-count {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  color: var(--color-paper-dim);
+  direction: ltr;
+}
+.lb-btn {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 0;
+  font-size: 1.3rem;
+  color: var(--color-paper);
+  background: rgb(0 0 0 / 0.55);
+  cursor: pointer;
+  transition: background 0.3s var(--ease-house);
+}
+.lb-btn:hover {
+  background: rgb(255 176 66 / 0.35);
+}
+.lb-close {
+  top: 10px;
+  inset-inline-end: 12px;
+}
+.lb-prev,
+.lb-next {
+  top: calc(50% - 26px);
+}
+.lb-prev {
+  inset-inline-start: 12px;
+}
+.lb-next {
+  inset-inline-end: 12px;
+}

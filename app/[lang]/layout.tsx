@@ -63,12 +63,13 @@ export default async function LangLayout({ children, params }: LangParams & { ch
         {/* החושך לפני האור קורה פעם אחת בביקור. רץ לפני הציור הראשון. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem('house.lit'))document.documentElement.dataset.lit='1';else sessionStorage.setItem('house.lit','1')}catch(e){}`,
+            __html: `try{if(sessionStorage.getItem('house.lit'))document.documentElement.dataset.lit='1';else sessionStorage.setItem('house.lit','1');if(sessionStorage.getItem('house.door')){document.documentElement.dataset.door='1';sessionStorage.removeItem('house.door')}}catch(e){}`,
           }}
         />
         <link rel="preload" href="/fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <div className="lamp" aria-hidden />
         <div className="grain" aria-hidden />
+        <div className="arrive" aria-hidden />
         <HouseMotion />
         <a href="#content" className="skip-link">
           {dict.house.skipToContent}

@@ -102,7 +102,7 @@ export async function buildLlmsFullTxt(): Promise<string> {
         `### ${cleanSeoText(cat.title)}`,
         `${cleanSeoText(cat.description)}`,
         `${cleanSeoText(catEn.title)}: ${cleanSeoText(catEn.description)}`,
-        `${base}/he/galleries`,
+        `${base}/he/galleries/${slug}`,
         "",
       ].join("\n");
     })

@@ -45,7 +45,8 @@ export default async function RoomPage({ params }: RoomParams) {
   const dict = await getDictionary(locale);
   if (room.door !== "open") return <ClosedDoor lang={locale} dict={dict} room={room} />;
 
-  const mod = (await import(`@/rooms/${slug}/room`)) as { default: RoomComponent };
+  /* סיומת מפורשת: בלעדיה הבאנדלר בוחר ב-room.json שיושב באותה תיקייה */
+  const mod = (await import(`@/rooms/${slug}/room.tsx`)) as { default: RoomComponent };
   const Room = mod.default;
   return <Room lang={locale} dict={dict} />;
 }

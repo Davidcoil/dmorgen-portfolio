@@ -222,6 +222,7 @@ export const he = {
       "אנשים אחרים, בקשות אחרות. תסתכלו על התמונות, ועל מה שבחרתי להראות בהן.",
     viewFullGallery: "לצפייה בגלריה",
     backToGalleries: "חזרה לכל העבודות",
+    next: "הקיר הבא",
     closePreview: "סגירת תצוגה",
     prevImage: "תמונה קודמת",
     nextImage: "תמונה הבאה",

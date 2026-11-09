@@ -130,6 +130,9 @@ export function HouseMotion() {
       flood.style.setProperty("--fx", `${e.clientX}px`);
       flood.style.setProperty("--fy", `${e.clientY}px`);
       flood.classList.add("on");
+      try {
+        sessionStorage.setItem("house.door", "1");
+      } catch {}
       setTimeout(() => (location.href = door.href), 620);
     };
     /* מקלדת: פוקוס על דלת הולך אליה */

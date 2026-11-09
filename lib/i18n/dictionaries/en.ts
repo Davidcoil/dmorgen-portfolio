@@ -220,6 +220,7 @@ export const en: Dictionary = {
     subtitle:
       "Different people, different requests. Look at the photos, and at what I chose to show in them.",
     viewFullGallery: "View gallery",
+    next: "Next wall",
     backToGalleries: "Back to all work",
     closePreview: "Close preview",
     prevImage: "Previous image",

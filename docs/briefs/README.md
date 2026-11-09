@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | 1 | `supabase-setup.md` | Fable עם דוד בדפדפן | | התחברות ל-Supabase דרך גוגל |
 | 2 | `entrance-paths.md` | Opus | | כלום |
-| 3 | `gallery-room.md` | Opus | | כלום (התמונות קיימות) |
+| 3 | `gallery-room.md` | נבנה | | |
 | 4 | `wall-live.md` | Opus | 1 | מזהה מקום בגוגל (Place ID), מפתח Places |
 | 5 | `booth.md` | Opus | | כלום |
 | 6 | `thoughts-telegram.md` | Codex (בוט) + Opus (חדר) | 1 | פתיחת בוט ב-BotFather (שתי הודעות) |
