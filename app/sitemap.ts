@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n/config";
-import { gallerySlugs } from "@/lib/content/galleries";
+import { gallerySlugs, getCategoryImages, type GalleryCategorySlug } from "@/lib/content/galleries";
 
 /* מפת אתר דו-לשונית עם hreflang לכל כתובת.
    CONTENT_UPDATED: התאריך שבו התוכן הציבורי השתנה באמת (קופי V2 עלה 15.11.2026).
@@ -19,6 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}${path}`])),
       },
+      // התמונות המקוריות (לא כתובות /_next/image), כדי שחיפוש תמונות יקשר אותן לעמוד.
+      ...(path.startsWith("/galleries/") && {
+        images: getCategoryImages(path.split("/")[2] as GalleryCategorySlug).map((i) => `${base}${i.src}`),
+      }),
     }))
   );
 }
