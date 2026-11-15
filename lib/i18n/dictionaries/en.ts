@@ -37,15 +37,9 @@ export const en: Dictionary = {
   },
   hero: {
     eyebrow: "David Morgenstern | Events, family, portrait and business photography",
-    title: "Some photos just happen. Others need a little help.",
+    title: "There are no unphotogenic people.",
     subtitle:
-      "I arrive prepared, but people, light and timing don't always follow the plan. That's part of what I enjoy: seeing what matters, knowing when to give direction, when to change course, and when to let a moment unfold. It's how I work, and what I bring to your shoot.",
-    alt: {
-      title: "There are no unphotogenic people.",
-      subtitle:
-        "You don't need to know how to pose. That's my job: understand the people, help when needed, and make space for real moments. The same thinking guides how I photograph events, families, portraits and businesses.",
-    },
-    previewSwitch: "Preview: main headline",
+      "You don't need to know how to pose. That's my job: understand the people, help when needed, and make space for real moments. The same thinking guides how I photograph events, families, portraits and businesses.",
     ctaPrimary: "See my work",
     ctaSecondary: "Tell me what you're planning",
     imageAlt: "Woman's portrait in soft studio light, photographed by David Morgenstern",

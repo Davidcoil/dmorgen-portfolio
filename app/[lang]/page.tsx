@@ -15,14 +15,10 @@ import { CtaSection } from "@/components/home/cta-section";
    עקרון: הלקוח הוא הגיבור; שום טקסט לא יושבת על פרצוף. */
 export default async function HomePage({
   params,
-  searchParams,
 }: {
   params: Promise<{ lang: string }>;
-  searchParams: Promise<{ hero?: string }>;
 }) {
   const { lang } = await params;
-  // ponytail: preview-only A/B switch for the hero; remove with the losing headline
-  const heroVariant = (await searchParams).hero === "b" ? "b" : "a";
   const locale: Locale = (locales as readonly string[]).includes(lang)
     ? (lang as Locale)
     : defaultLocale;
@@ -30,7 +26,7 @@ export default async function HomePage({
 
   return (
     <>
-      <Hero lang={locale} dict={dict} variant={heroVariant} />
+      <Hero lang={locale} dict={dict} />
       <ShootTypes lang={locale} dict={dict} />
       <CategoryTabs lang={locale} dict={dict} />
       <ValueProps dict={dict} />

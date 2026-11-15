@@ -17,16 +17,7 @@ const item: Variants = {
 
 /* Hero טיפוגרפי עריכתי — הכותרת מובילה, התמונה נושמת לצידה.
    עקרון ברזל: אף מילה לא יושבת על פרצוף של אדם. */
-export function Hero({
-  lang,
-  dict,
-  variant = "a",
-}: {
-  lang: Locale;
-  dict: Dictionary;
-  variant?: "a" | "b";
-}) {
-  const copy = variant === "b" ? dict.hero.alt : dict.hero;
+export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 pt-28 pb-24 md:pt-44 md:pb-32 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
@@ -53,7 +44,7 @@ export function Hero({
             custom={1}
             className="mt-7 font-display text-[2.9rem] leading-[1.12] text-balance text-foreground md:text-6xl lg:text-[4.4rem]"
           >
-            {copy.title}
+            {dict.hero.title}
           </motion.h1>
 
           <motion.p
@@ -63,7 +54,7 @@ export function Hero({
             custom={2}
             className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
           >
-            {copy.subtitle}
+            {dict.hero.subtitle}
           </motion.p>
 
           <motion.div
@@ -87,24 +78,6 @@ export function Hero({
             </Link>
           </motion.div>
 
-          {/* תצוגה מקדימה בלבד: מעבר בין שתי חלופות הכותרת */}
-          <p className="mt-12 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-            {dict.hero.previewSwitch}
-            {(["a", "b"] as const).map((v) => (
-              <Link
-                key={v}
-                href={v === "a" ? `/${lang}` : `/${lang}?hero=b`}
-                scroll={false}
-                className={
-                  v === variant
-                    ? "rounded-full bg-foreground px-3 py-1 font-semibold text-background"
-                    : "rounded-full border border-border px-3 py-1 hover:border-foreground"
-                }
-              >
-                {v.toUpperCase()}
-              </Link>
-            ))}
-          </p>
         </div>
 
         {/* תמונה — פריים שקט, כיתוב מתחת. שום טקסט עליה. */}
