@@ -76,7 +76,7 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <LanguageSwitcher lang={lang} />
             <Link
               href={`/${lang}/contact`}
-              className="rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background transition-colors hover:bg-champagne-600"
+              className="whitespace-nowrap rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background transition-colors hover:bg-champagne-600"
             >
               {dict.nav.bookNow}
             </Link>
