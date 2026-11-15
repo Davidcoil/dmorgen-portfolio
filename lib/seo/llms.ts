@@ -25,6 +25,9 @@ function pagesSection(base: string): string {
     ["תדמית לעסקים", `${base}/he/galleries/business`],
     ["על דוד", `${base}/he/about`],
     ["דברו איתי", `${base}/he/contact`],
+    ["Portfolio (English)", `${base}/en/galleries`],
+    ["About David (English)", `${base}/en/about`],
+    ["Contact (English)", `${base}/en/contact`],
   ];
   return pages.map(([label, url]) => `- [${label}](${url})`).join("\n");
 }
@@ -47,6 +50,13 @@ export async function buildLlmsTxt(): Promise<string> {
     return `- ${cleanSeoText(cat.title)}: ${cleanSeoText(cat.description)}`;
   });
 
+  const categoriesEn = (Object.keys(en.galleries.categories) as Array<
+    keyof typeof en.galleries.categories
+  >).map((slug) => {
+    const cat = en.galleries.categories[slug];
+    return `- ${cleanSeoText(cat.title)}: ${cleanSeoText(cat.description)} ${base}/en/galleries/${slug}`;
+  });
+
   return [
     "# David Morgenstern (דוד מורגנשטרן)",
     "",
@@ -55,15 +65,19 @@ export async function buildLlmsTxt(): Promise<string> {
     cleanSeoText(he.meta.description),
     "",
     "David Morgenstern is a photographer, copywriter and AI systems builder based in Jerusalem, " +
-      "working with families and businesses in Israel and abroad. " +
+      "photographing families, events, portraits and businesses across Israel, in Hebrew or English. " +
       "Known for the principle \"there are no unphotogenic people\" and the belief that a good photo starts with feeling good. " +
       cleanSeoText(en.meta.description),
     "",
     "## Services",
     ...categories,
-    "- Company events, conferences, business portraits and photo content for businesses.",
-    "- Family events only (Bar and Bat Mitzvah, brit ceremonies, birthdays), family sessions, portraits and business photography.",
-    "- Also builds AI tools and writes copy for everything around the shoot, for his own studio and for businesses.",
+    "",
+    "## Services (English)",
+    ...categoriesEn,
+    "",
+    "Photography is what can be booked through this site today. David also writes copy and builds AI tools, but these are not offered as public services on the site.",
+    "Price: set per job once the needs are clear, in a written proposal that lists scope, deliverables and delivery date. There is no public price list.",
+    "Today David photographs the jobs himself.",
     "",
     "## How it works",
     ...he.home.howItWorks.steps.map(

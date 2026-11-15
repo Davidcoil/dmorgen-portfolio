@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageMeta } from "@/lib/seo/meta";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Wall } from "@/components/home/wall";
-import { personJsonLd } from "@/lib/seo/jsonld";
-import { JsonLdScript } from "@/lib/seo/json-ld-script";
-import { cleanSeoText } from "@/lib/seo/text";
 
 type LangParams = { params: Promise<{ lang: string }> };
 
@@ -22,10 +20,7 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const { lang } = await params;
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
-  return {
-    title: { absolute: dict.seo.aboutTitle },
-    description: dict.seo.aboutDescription,
-  };
+  return pageMeta(locale, "/about", dict.seo.aboutTitle, dict.seo.aboutDescription, dict.meta.siteName, dict.hero.imageAlt);
 }
 
 /* עמוד “האדם מאחורי המצלמה” — החיבור האישי שמוכר. */
@@ -37,12 +32,6 @@ export default async function AboutPage({ params }: LangParams) {
 
   return (
     <div className="mx-auto max-w-6xl px-6 pt-36 pb-24 md:pt-44 md:pb-32">
-      <JsonLdScript
-        data={personJsonLd({
-          lang: locale,
-          description: cleanSeoText(t.paragraphs[0]),
-        })}
-      />
       <SectionHeading level="h1" eyebrow={t.eyebrow} title={t.title} />
 
       <div className="mt-14 grid items-start gap-12 md:grid-cols-5 md:gap-16">

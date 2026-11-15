@@ -22,7 +22,8 @@ export function proxy(request: NextRequest) {
 
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  // 308: ההפניה קבועה (תמיד לעברית), כך שגוגל מאחד את הכתובות בלי לנחש.
+  return NextResponse.redirect(url, 308);
 }
 
 export const config = {

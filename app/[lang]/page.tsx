@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageMeta } from "@/lib/seo/meta";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
 import { Hero } from "@/components/home/hero";
 import { ShootTypes } from "@/components/home/shoot-types";
@@ -13,6 +15,19 @@ import { CtaSection } from "@/components/home/cta-section";
 /* דף הבית: הירו טיפוגרפי → רצועת ביטחון → סיפורי לקוחות → ערכים →
    איך זה עובד → מסלול קורפורייט → טיזר אישי → סגירה שקטה.
    עקרון: הלקוח הוא הגיבור; שום טקסט לא יושבת על פרצוף. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale: Locale = (locales as readonly string[]).includes(lang)
+    ? (lang as Locale)
+    : defaultLocale;
+  const d = await getDictionary(locale);
+  return pageMeta(locale, "", d.meta.title, d.meta.description, d.meta.siteName, d.hero.imageAlt);
+}
+
 export default async function HomePage({
   params,
 }: {

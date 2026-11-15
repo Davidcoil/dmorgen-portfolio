@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageMeta } from "@/lib/seo/meta";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
 import { gallerySlugs, getCategoryImages } from "@/lib/content/galleries";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const { lang } = await params;
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
-  return {
-    title: { absolute: dict.seo.galleriesTitle },
-    description: dict.seo.galleriesDescription,
-  };
+  return pageMeta(locale, "/galleries", dict.seo.galleriesTitle, dict.seo.galleriesDescription, dict.meta.siteName, dict.hero.imageAlt);
 }
 
 /* עמוד הסיפורים — אינדקס עריכתי ממוספר. הטקסט בשטח שלו, התמונה בשלה.
