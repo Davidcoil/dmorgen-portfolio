@@ -12,7 +12,8 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ChatAssistant } from "@/components/chat-assistant/chat-assistant";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
-import { professionalServiceJsonLd } from "@/lib/seo/jsonld";
+import { siteGraphJsonLd } from "@/lib/seo/jsonld";
+import { Analytics } from "@vercel/analytics/next";
 
 /* דיספליי גיאומטרי בטוח לכותרות — Secular One: עוצמה, יציבות, מודרניות.
    משקל יחיד 400 (כבד מטבעו) — היררכיה דרך גודל, לא דרך משקל.
@@ -61,10 +62,6 @@ export async function generateMetadata({
       template: `%s · ${dict.meta.siteName}`,
     },
     description: dict.meta.description,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: { he: "/he", en: "/en" },
-    },
     openGraph: {
       type: "website",
       locale: locale === "he" ? "he_IL" : "en_US",
@@ -106,16 +103,14 @@ export default async function LangLayout({
     >
       <body className="min-h-screen bg-background text-foreground">
         <JsonLdScript
-          data={professionalServiceJsonLd({
-            lang: locale,
-            name: dict.meta.siteName,
-            description: dict.meta.description,
-          })}
+          data={siteGraphJsonLd({ lang: locale, dict })}
         />
         <SiteHeader lang={locale} dict={dict} />
         <main>{children}</main>
         <SiteFooter lang={locale} dict={dict} />
         <ChatAssistant lang={locale} chat={dict.chat} />
+        {/* מדידת ביקורים בלי עוגיות (Vercel Web Analytics). מקור ההגעה, כולל chatgpt.com, מופיע בלוח. */}
+        <Analytics />
       </body>
     </html>
   );

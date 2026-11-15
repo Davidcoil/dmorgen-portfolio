@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageMeta } from "@/lib/seo/meta";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
 import { siteConfig, telHref, whatsappLink } from "@/lib/site";
 import { BookingForm } from "@/components/contact/booking-form";
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const { lang } = await params;
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
-  return {
-    title: { absolute: dict.seo.contactTitle },
-    description: dict.seo.contactDescription,
-  };
+  return pageMeta(locale, "/contact", dict.seo.contactTitle, dict.seo.contactDescription, dict.meta.siteName, dict.hero.imageAlt);
 }
 
 /* עמוד צור קשר: טופס קביעת תאריך (נפתח בוואטסאפ) + פרטי קשר ישירים. */

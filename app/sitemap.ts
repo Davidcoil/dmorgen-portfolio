@@ -1,33 +1,28 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n/config";
+import { gallerySlugs, getCategoryImages, type GalleryCategorySlug } from "@/lib/content/galleries";
 
-/* מפת אתר דו־לשונית — נבנית אוטומטית לכל שפה. */
-const LAST_MODIFIED = new Date("2026-09-27");
+/* מפת אתר דו-לשונית עם hreflang לכל כתובת.
+   CONTENT_UPDATED: התאריך שבו התוכן הציבורי השתנה באמת (קופי V2 עלה 15.11.2026).
+   מעדכנים ידנית כשמשנים תוכן, לא בכל פריסה. גוגל ובינג סומכים על lastmod רק כשהוא אמין.
+   priority ו-changefreq הוסרו: גוגל מתעלם מהם. */
+const CONTENT_UPDATED = new Date("2026-11-15");
+
+const paths = ["", "/galleries", ...gallerySlugs.map((s) => `/galleries/${s}`), "/about", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com").replace(
-    /\/$/,
-    ""
-  );
-
-  const routes = [
-    { path: "", priority: 1, changeFrequency: "weekly" as const },
-    { path: "/galleries", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/galleries/events", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/galleries/family", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/galleries/portraits", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/galleries/business", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/contact", priority: 0.9, changeFrequency: "yearly" as const },
-  ];
-
-  const now = LAST_MODIFIED;
+  const base = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com").replace(/\/$/, "");
   return locales.flatMap((lang) =>
-    routes.map((r) => ({
-      url: `${base}/${lang}${r.path}`,
-      lastModified: now,
-      changeFrequency: r.changeFrequency,
-      priority: r.priority,
+    paths.map((path) => ({
+      url: `${base}/${lang}${path}`,
+      lastModified: CONTENT_UPDATED,
+      alternates: {
+        languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}${path}`])),
+      },
+      // התמונות המקוריות (לא כתובות /_next/image), כדי שחיפוש תמונות יקשר אותן לעמוד.
+      ...(path.startsWith("/galleries/") && {
+        images: getCategoryImages(path.split("/")[2] as GalleryCategorySlug).map((i) => `${base}${i.src}`),
+      }),
     }))
   );
 }
