@@ -63,11 +63,6 @@ export function Wall({
           ))}
         </ul>
 
-        {!compact && t.note ? (
-          <p className="mt-12 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            {t.note}
-          </p>
-        ) : null}
       </div>
     </section>
   );

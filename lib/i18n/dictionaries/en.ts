@@ -1,150 +1,157 @@
 /* ============================================================================
  * English dictionary. Mirrors the Hebrew key structure exactly.
- * Brand voice (V3, November 2026): written, not translated. Plain English,
- * warm, a little cheeky. The joke is always on David, never on the client.
- * We never crown ourselves: the sentences talk about the reader.
- * No long dashes. No photography cliches. No unconfirmed facts.
+ * Copy V2 (15 Nov 2026), from 04_COPY_EN_APPROVAL.md. The Hebrew is
+ * authoritative for intent; this is written English, not a translation.
+ * No long dashes. No wedding content. No unconfirmed facts.
  * ========================================================================== */
 
 import type { Dictionary } from "./he";
 
 export const en: Dictionary = {
   meta: {
-    siteName: "David Morgenstern | Photography for People and Business",
-    title: "David Morgenstern | Events, Portraits and Business Photography",
+    siteName: "David Morgenstern",
+    title: "David Morgenstern | Events, Families, Portraits & Business Photography",
     description:
-      "Bar and Bat Mitzvah, family sessions, portraits and company events in Israel. A good photo starts with feeling good. What do you want people to see?",
+      "Photography for events, families, portraits and businesses. Thoughtful planning, attention to people and a clear approach to the final images.",
+  },
+  seo: {
+    galleriesTitle: "Photography Portfolio | David Morgenstern",
+    galleriesDescription:
+      "Selected events, families, portraits and business photography by David Morgenstern.",
+    aboutTitle: "About David Morgenstern | People, Photography and Creative Thinking",
+    aboutDescription:
+      "David Morgenstern photographs events, families, portraits and businesses. He comes prepared, adapts to the day, and gets the important photos first.",
+    contactTitle: "Contact David Morgenstern | Photography Inquiries",
+    contactDescription:
+      "Tell David Morgenstern what you'd like photographed, where and when. An event, family photos, a portrait or business photography. Your details open as a WhatsApp draft.",
+    clientAreaTitle: "Client Area | David Morgenstern",
   },
   nav: {
     galleries: "Work",
-    events: "Events",
-    family: "Family & Kids",
-    portraits: "Portraits",
-    business: "Business Photography",
-    about: "About David",
+    about: "About",
     clientArea: "Client Area",
-    contact: "Talk to me",
-    bookNow: "Let's talk",
+    contact: "Contact",
+    bookNow: "Get in touch",
     openMenu: "Open menu",
     closeMenu: "Close menu",
   },
   hero: {
-    eyebrow: "Photography for people and businesses",
-    title: "There are no unphotogenic people.",
+    eyebrow: "David Morgenstern | Events, family, portrait and business photography",
+    title: "Some photos just happen. Others need a little help.",
     subtitle:
-      "Only people who haven't felt good in front of a camera yet. So first you feel good, then we shoot. And before anything else, one question: what do you want people to see?",
-    ctaPrimary: "Let's talk",
-    ctaSecondary: "See the work",
-    trustLine: "A good photo starts with feeling good.",
+      "I arrive prepared, but people, light and timing don't always follow the plan. That's part of what I enjoy: seeing what matters, knowing when to give direction, when to change course, and when to let a moment unfold. It's how I work, and what I bring to your shoot.",
+    alt: {
+      title: "There are no unphotogenic people.",
+      subtitle:
+        "You don't need to know how to pose. That's my job: understand the people, help when needed, and make space for real moments. The same thinking guides how I photograph events, families, portraits and businesses.",
+    },
+    previewSwitch: "Preview: main headline",
+    ctaPrimary: "See my work",
+    ctaSecondary: "Tell me what you're planning",
     imageAlt: "Woman's portrait in soft studio light, photographed by David Morgenstern",
-    scrollHint: "Scroll down",
   },
   home: {
-    galleriesEyebrow: "Selected work",
-    galleriesTitle: "See what I mean.",
-    galleriesSubtitle:
-      "Families, people and businesses. Each came with a different request, and with at least one person who was sure they weren't photogenic.",
-    midCtaText: "Have something like this in mind?",
-    trustStrip: {
-      eyebrow: "Settled before we start",
+    shootTypes: {
+      title: "What are you planning?",
+      cta: "See photos",
       items: [
         {
-          icon: "shield",
-          title: "The shoot",
-          text: "We agree on the scope before booking: what you're celebrating, who has to be in the photos, what can't be missed.",
+          slug: "events",
+          title: "Events",
+          text: "Bar and Bat Mitzvahs, brit ceremonies, birthdays and company events. I start by finding out which people and moments matter most.",
         },
         {
-          icon: "contract",
-          title: "The photos",
-          text: "It's written in the proposal. You book a defined job, and that's what you get.",
+          slug: "family",
+          title: "Family and children",
+          text: "I want you to have a good photo of everyone together. And if everyone starts laughing for real along the way, I'm not going to stop them.",
         },
         {
-          icon: "clock",
-          title: "Who shows up",
-          text: "You know in advance. Today that's me, early, with a plan, which I then change to fit who actually came.",
+          slug: "portraits",
+          title: "Portraits",
+          text: "You don't need to know how to pose. I guide you, look for the best light and adjust as we go, even if you've never liked photos of yourself.",
         },
         {
-          icon: "backup",
-          title: "When you get them",
-          text: "The delivery date is set before booking, not after.",
+          slug: "business",
+          title: "Business photography",
+          text: "A team photo, professional portrait and company event do different jobs. I start with how you'll use the images, then plan around that.",
+        },
+      ],
+    },
+    galleriesEyebrow: "Selected work",
+    galleriesTitle: "Some of my work",
+    galleriesSubtitle:
+      "Families, events, portraits and business photography. Take a look and see if this is the kind of photography you are looking for.",
+    galleriesCta: "See all work",
+    approach: {
+      eyebrow: "Behind the photos",
+      title: "I come with a plan. Then I work with what's actually there.",
+      intro:
+        "For outdoor sessions, I like to arrive early, check the location and light, and prepare. Then I meet the people, and the plan meets real life. I adjust to them and the time we have. First, we get the important shots. Then there's room for everything else.",
+      items: [
+        {
+          title: "Know what matters",
+          text: "Who must be in the photos? What do you most want to see afterwards? I'd rather know before the event begins.",
+        },
+        {
+          title: "Guide without pressure",
+          text: "If people need help posing, I guide them. If they're tense, I help them loosen up. And if something great happens naturally, I don't get in its way.",
+        },
+        {
+          title: "Focus on the result",
+          text: "First, the photos that really matter to you. Then we can explore, try other ideas and have some fun. When time gets tight, priorities matter.",
         },
       ],
     },
     howItWorks: {
-      eyebrow: "How it works",
-      title: "From first call to final photos",
+      eyebrow: "Know what comes next",
+      title: "From your message to your photos",
       steps: [
         {
-          title: "A short conversation",
-          text: "Tell me what you need, when, where, and who the photos are for.",
+          title: "Your message",
+          text: "Tell me what you're planning, where and when, and what matters to you.",
         },
         {
-          title: "A written proposal",
-          text: "The scope, what you'll receive and the price. All in writing, no surprises later.",
-        },
-        {
-          title: "Agree on the details",
-          text: "We confirm the job and go over what matters ahead of time: the people, the moments, the sensitivities.",
+          title: "Define the job",
+          text: "We agree on the scope, price and deliverables in writing before booking.",
         },
         {
           title: "The shoot",
-          text: "We work to the plan and adjust to what happens on the day. Feeling good makes good photos.",
+          text: "We arrive prepared and adapt to the day as it unfolds.",
         },
         {
-          title: "Your photos",
-          text: "Selected, edited and delivered on the date we agreed.",
+          title: "Delivery",
+          text: "Selected, edited digital files, delivered as agreed.",
         },
       ],
     },
-    valueProps: [
-      {
-        title: "First, I ask.",
-        text: "Who has to be in the photos? What can't be missed? Who are they for? Your answers decide what I shoot and what stays out. The neighbors' kid, for example, however cute.",
-      },
-      {
-        title: "The camera doesn't decide.",
-        text: "When to guide and when to let things happen, when to keep going and when to stop. Nobody has to stand there like a log. Feel good first, the photo follows.",
-      },
-      {
-        title: "Know what you're getting.",
-        text: "We start with a short conversation: what we're shooting, who will be there and what you'll receive. Then it goes into a written proposal. You book a defined job, and that's what you get.",
-      },
-    ],
     corporate: {
       eyebrow: "For businesses",
-      title: "People see you before they read about you.",
+      title: "A good business image needs to know where it's going to work.",
       subtitle:
-        "Team portraits, a company event or photos for your website. First I want to know who will see the images and what they should understand. Then we shoot.",
+        "A team portrait, a website image and company event photography can all look great, but they have different jobs. Once I know who will see the images and where they'll be used, I can plan a shoot that fits.",
       services: [
         {
           title: "Company events and conferences",
-          text: "Who has to be seen, what happens during the event and where the photos will be used. We settle that before the shoot.",
+          text: "We identify the people, activities and moments to cover, and how the pictures will be used.",
         },
         {
           title: "Business portraits",
-          text: "The faces people are about to meet on your website, in a presentation or on a professional profile. Looking good, and looking like you.",
+          text: "Photos of the people behind your business, for your website, professional profiles and marketing.",
         },
         {
-          title: "Photo content for business",
-          text: "Images for websites and marketing materials, shot with their final place in mind.",
+          title: "Marketing images",
+          text: "Photography planned for where the finished images need to work.",
         },
       ],
-      trustTitle: "We work like a business",
-      trustItems: [
-        "Short briefing call",
-        "Written scope",
-        "Deliverables and dates agreed in advance",
-        "Proper tax invoice",
-      ],
-      cta: "Let's talk about your business",
-      waMessage: "Hi David, we have a business and we want people to see it right. Can we talk?",
+      ctaGallery: "See business photography",
+      ctaTalk: "Ask about a business shoot",
+      waMessage: "Hi David, I'd like to talk about business photography.",
     },
     wall: {
-      eyebrow: "The wall",
-      title: "What people wrote afterwards.",
+      eyebrow: "Messages I've received",
+      title: "This part isn't written by me.",
       subtitle:
-        "Real messages I received after events and albums, in their own words. First names only; the rest stays between them and me. Hebrew messages are translated.",
-      note: "Notice what repeats? Nobody wrote \"sharp photos\". They write about patience, about how they were treated, and about the album. That's not a coincidence, and it's what I sell.",
+        "A few notes from people I've photographed. Messages written in Hebrew are translated.",
       items: [
         {
           quote:
@@ -202,130 +209,142 @@ export const en: Dictionary = {
     },
     aboutTeaser: {
       eyebrow: "Nice to meet you",
-      title: "I'm David. The camera is the small part.",
-      text: "I'm curious about what people want to show, what they worry others might see, and what will make them smile at their own photo. It's the same with businesses: who are you, and what should the photo say about you? The camera already knows the rest.",
+      title: "I'm David. I like people, and I like things to work.",
+      text: "That's what I enjoy about photography: noticing what works for the person in front of me, knowing when to step in and when to step back, and making the small choices that shape the whole picture. I also love ideas, content and technology. But I always come back to a simple question: what works here, for these people?",
       cta: "A little more about me",
       imageAlt: "David Morgenstern, no camera in hand",
     },
     cta: {
-      title: "So, what do you want people to see?",
+      title: "What are you planning?",
       subtitle:
-        "Tell me what you're planning, where and when. We'll see if it's a good fit, and if we go ahead you'll get a written proposal. I promise not to sell you anything you don't want. I'm bad at that.",
-      primary: "Let's talk",
-      secondary: "Message on WhatsApp",
+        "An event, family pictures, a portrait or photos for your business. Tell me a little about what you need, where and when, and we'll see if it's a fit.",
+      primary: "Share the details",
+      secondary: "Message me on WhatsApp",
     },
   },
   galleries: {
-    title: "See the work",
+    title: "See it in the pictures",
     subtitle:
-      "Different people, different requests. Look at the photos, and at what I chose to show in them.",
-    viewFullGallery: "View gallery",
+      "Pick the type of photography you are interested in. There is plenty I could explain, but this is a better place to look at pictures.",
+    viewFullGallery: "Open gallery",
     backToGalleries: "Back to all work",
     closePreview: "Close preview",
     prevImage: "Previous image",
     nextImage: "Next image",
+    cta: {
+      title: "Need photography like this?",
+      subtitle: "Tell me the date, location and what matters to you. We'll see if it fits.",
+      primary: "Share the details",
+    },
     categories: {
       events: {
         title: "Events",
-        tagline: "Bar and Bat Mitzvahs · Brit Ceremonies · Birthdays · Company Events",
+        metaTitle: "Event and Bar Mitzvah Photography | David Morgenstern",
+        tagline: "Bar and Bat Mitzvahs | Brit ceremonies | Birthdays | Company events",
         description:
-          "One event, many people, and they don't all matter equally to you. I find out ahead of time who and what you want in the photos, and I make sure they're there. Including the one who said they don't do photos.",
+          "Bar and Bat Mitzvahs, brit ceremonies, birthdays and company events. Lots of people, lots happening at once. Knowing what to watch for matters.",
+        intro:
+          "At an event, people move, talk, celebrate and catch up. I can't be everywhere at once, so I find out in advance who matters and what you'd like to see in the pictures afterwards. Then I can focus on the work.",
+        cta: "Ask about event photography",
       },
       family: {
-        title: "Family & Kids",
-        tagline: "Family photos outdoors or at a place you love",
+        title: "Family & children",
+        metaTitle: "Family and Children's Photography | David Morgenstern",
+        tagline: "Family and children",
         description:
-          "There's the photo where everyone looks at the camera. And there's what happens between you when you stop thinking about it. I make room for both.",
+          "The photo where everyone looks at the camera, and the moments after they stop trying.",
+        intro:
+          "We all know how hard it can be to get everyone into one picture. I make sure we get that important family photo first, then we can move around, try different arrangements and let everyone loosen up. Nobody has to stand like a statue to look good.",
+        cta: "Ask about family photos",
       },
       portraits: {
         title: "Portraits",
-        tagline: "Portraits · Maternity · Personal Branding",
+        metaTitle: "Portrait Photography | David Morgenstern",
+        tagline: "Portraits and personal branding",
         description:
-          "You don't need to know how to pose. Where to stand, where to look and what to do is my job. Your only job is to feel comfortable, and I help with that too.",
+          "Being in front of a camera is not a test. I'll take care of direction, lighting and the photograph. You don't have to arrive knowing how to pose.",
+        intro:
+          "There are no unphotogenic people. Sometimes people simply haven't found a way they like seeing themselves in photos. That's where I come in: guiding, trying different light and angles, and making small changes until the pictures feel right.",
+        cta: "Ask about a portrait",
       },
       business: {
-        title: "Business Photography",
-        tagline: "Business Portraits · Company Events · Photo Content",
+        title: "Business photography",
+        metaTitle: "Business Portraits and Event Photography | David Morgenstern",
+        tagline: "Business portraits | Company events | Marketing images",
         description:
-          "Who you are, what you do and how you want to come across to someone meeting you for the first time. I start there, and only then do I shoot.",
+          "Professional portraits, company events and marketing images, made with their audience in mind.",
+        intro:
+          "I start with how the images will be used. Who will see them? Where will they appear? What should people understand? Once we know that, we can plan how to photograph the people, the space and the work happening there.",
+        cta: "Ask about business photography",
       },
     },
   },
   about: {
-    eyebrow: "The person behind the name",
-    title: "Hi, I'm David Morgenstern.",
+    eyebrow: "Nice to meet you",
+    title: "I'm David Morgenstern.",
     imageAlt: "David Morgenstern",
     paragraphs: [
-      "The technical side never interested me. What interests me is the person in front of the camera: what matters to them, how they see themselves, and what will make them love what they see. A good photo starts with feeling good. The rest is pixels.",
-      "At an event, I want to know which people matter to you and what can't be missed. In a portrait, I look at the person long before the light. With a business, I ask what the photos need to do. Different jobs, same way of thinking.",
-      "There's one moment I work for: someone looks at a photo of themselves and thinks, wow, that's me. And I love what I see. To me, that means we made the right choices.",
-      "I also write, make content and build AI tools for everything around the shoot, from the first question to the day the photos land with you. Not to replace the feeling. To leave more room for it.",
-      "I'm a single dad to a teenager who is smarter and more talented than me. Every day she amazes me and drives me a little crazy, the good kind. It's also why I want more kids.",
-      "I arrive early and with a plan, then I change it to fit who shows up. A stroller means fewer stairs. A grandmother means less walking. And there's a base I deliver even when the day doesn't go to plan. Nothing less.",
+      "I've been photographing people for years, and I still think carefully before every job about how to make the best photos I can. I like coming prepared: knowing who's involved, what matters to them, what the place is like and how to work with the light.",
+      "Then I meet the actual people. Some are relaxed. Others are halfway through a stressful day and not exactly ready for pictures. I try to notice that quickly, adjust the pace and help. Sometimes a little direction is enough. Sometimes you have to help a happy moment happen before you can photograph it.",
+      "I especially enjoy family photos and portraits, where you can see how much people's comfort changes the picture. I often say that feeling good leads to better photos. At events, there's also the responsibility to pay attention to what's happening and make room for the people and moments that matter.",
+      "You can't know everything about the day in advance. I make plans, but I don't get attached to them. If we need to change location, shorten the walk or focus on the essential shots first, that's what I'll do. The point isn't to impress you with photography talk. It's to give you pictures you'll love.",
+      "I also work with ideas, content and technology, and I enjoy finding better, simpler ways to get things done. Photography is one of the places those interests come together. It's also what you can book me for here.",
     ],
     values: [
       {
-        title: "There's no such thing as unphotogenic.",
-        text: "Only people who haven't felt good in front of a camera yet. My job is to find, with you, how you like to see yourself.",
+        title: "People, not poses",
+        text: "I adapt my guidance to who's in front of me instead of expecting everyone to feel the same way about being photographed.",
       },
       {
-        title: "Every photo has a job.",
-        text: "A portrait, a family photo and a photo for a business have different purposes. First I understand the purpose, then I decide how to shoot.",
+        title: "A plan that leaves room for real life",
+        text: "Prepare in advance, decide in the moment, and adjust when time, place or people surprise us.",
       },
       {
-        title: "The work doesn't end with a click.",
-        text: "Selecting, editing and delivering are part of the result. And I'm building tools that shorten the way from the shoot to your photos.",
+        title: "The important photos come first",
+        text: "I focus on what you've booked the shoot to achieve. Once that's covered, we can try the extra ideas.",
       },
     ],
-    cta: "Let's see if we're a good fit",
+    ctaPrimary: "See the work",
+    ctaSecondary: "Talk about a shoot",
   },
   contact: {
-    title: "Tell me what you need",
+    title: "What would you like photographed?",
     subtitle:
-      "What are we shooting, where and when? Let's start there and see if it fits. No pressure, no trick questions.",
+      "Tell me a little about the job: what kind of photography, the approximate date, location and anything especially important. The details will open in WhatsApp, where we can take it from there.",
     form: {
-      name: "Full name",
+      name: "Name",
       namePlaceholder: "What should I call you?",
       phone: "Phone",
-      phonePlaceholder: "050-0000000",
-      eventType: "What are we shooting",
-      eventDate: "Estimated date",
-      message: "Tell me more",
-      messagePlaceholder: "Where? How many people? Who's sure they're not photogenic? Anything helps.",
-      submit: "Continue to WhatsApp",
-      note: "Your details will open in a WhatsApp message, so it's easy to start. I read everything myself, even at 2am. Mostly at 2am.",
+      phonePlaceholder: "Best number to reach you",
+      eventType: "What do you need?",
+      eventDate: "Approximate date",
+      message: "Tell me what's important (optional)",
+      messagePlaceholder: "Location, who's involved, what you'd like to receive...",
+      submit: "Open message in WhatsApp",
+      note: "Your details will appear in a draft message. You can check it before sending.",
       missingNumber:
-        "WhatsApp number not configured. Add NEXT_PUBLIC_WHATSAPP_NUMBER to the environment file.",
-      eventTypes: [
-        "Bar/Bat Mitzvah",
-        "Brit Ceremony",
-        "Birthday",
-        "Company Event",
-        "Family Session",
-        "Portrait",
-        "Business Photography",
-        "Other",
-      ],
+        "WhatsApp number not configured. Add NEXT_PUBLIC_WHATSAPP_NUMBER to your environment file.",
+      eventTypes: ["Event", "Family & children", "Portrait", "Business photography", "Something else"],
     },
     direct: {
-      title: "Prefer direct?",
+      title: "Prefer to message me directly?",
       phoneLabel: "Phone",
       emailLabel: "Email",
       whatsappLabel: "WhatsApp",
-      whatsappValue: "Message me",
+      whatsappValue: "Open WhatsApp chat",
     },
   },
   clientGallery: {
-    eyebrow: "Client Area",
+    eyebrow: "Client area",
     title: "Your photos",
-    subtitle:
-      "Look through your photos and choose your favorites here. I know it's hard. Everyone came out good, that's the problem.",
-    openInNewTab: "Open in new tab",
+    subtitle: "Open your private gallery here and follow the instructions there.",
+    openInNewTab: "Open client area",
+    newSiteNote: "This opens a separate website.",
   },
   footer: {
-    tagline: "A good photo starts with feeling good.",
-    navTitle: "Navigate",
-    contactTitle: "Talk to me",
+    services: "Events | Families | Portraits | Business photography",
+    navTitle: "Navigation",
+    contactTitle: "Contact",
     rights: "All rights reserved",
   },
   chat: {
@@ -348,40 +367,40 @@ export const en: Dictionary = {
     title: "Questions people ask me",
     items: [
       {
-        q: "How do you set the price?",
-        a: "It depends on the type of shoot, its scope, the location and what you want to receive. After a short call you get a written proposal with everything that's included. No \"call us and we'll talk\" game, and no surprises afterwards.",
+        q: "How is the price determined?",
+        a: "It depends on the type of shoot, scope, location and deliverables. Once I understand what you need, I'll send a written proposal explaining what's included.",
       },
       {
-        q: "When will we get the photos?",
-        a: "Usually within a week of the event, after selection and editing. We set the exact date before booking, so nobody has to guess.",
+        q: "When will we receive the photos?",
+        a: "We agree on the delivery date before booking, and it appears in the proposal. The photos are delivered after selection and editing, as agreed.",
+      },
+      {
+        q: "What will we receive?",
+        a: "Digital photo files, selected and edited according to the scope and terms of the proposal. You'll know exactly what's included.",
       },
       {
         q: "Where do you work?",
-        a: "I'm based in Jerusalem and I shoot all over Israel. Any travel cost is written in the proposal in advance.",
+        a: "I travel from Jerusalem to shoots across Israel. Any travel costs will be shown in the proposal.",
       },
       {
-        q: "We're not photogenic. Is that a problem?",
-        a: "There's no such thing. Only people who haven't felt good in front of a camera yet. You don't need to know what to do: I guide you and keep changing things until we find what works for you. Whoever is sure they don't photograph well, send them first. I like a challenge.",
+        q: "We're not comfortable in front of a camera. Is that a problem?",
+        a: "Not at all. I'll help with posing, lighting and pacing until we find a way that feels comfortable and fits the result you're after.",
       },
       {
-        q: "Why hire a photographer if our phone is good?",
-        a: "Phones take great photos. But you want to be in the picture, not behind it. And someone has to decide what to shoot, guide people and know when to press the button. In low light, the gear makes a difference too.",
+        q: "Will you photograph the shoot yourself?",
+        a: "Yes, today I photograph every shoot myself. You'll know who is photographing the job before you book.",
       },
       {
-        q: "What kinds of shoots can I book?",
-        a: "Family events, Bar and Bat Mitzvahs, brit ceremonies, birthdays, family sessions, portraits, company events and business photography. Planning something else? Tell me and we'll see.",
+        q: "Why hire a photographer when my phone is great?",
+        a: "Phones can take wonderful photos. My work also includes guiding people, building the frame, adapting to changing conditions and capturing the images while you enjoy what's happening.",
       },
       {
-        q: "Can we order an album too?",
-        a: "Yes, and it's the thing clients get most excited about in the end. Tell me you'd like one, and we'll agree in advance on what's included, how you choose, and when it reaches you.",
-      },
-      {
-        q: "Will you be the photographer?",
-        a: "Yes. When you book me, I'm the one who comes. And on the day I have a team, you'll know in advance who is coming and to what standard, before we agree.",
+        q: "What kinds of photography can I book?",
+        a: "Bar and Bat Mitzvahs, brit ceremonies, birthdays, family photos, portraits, company events and business photography. Something else in mind? Tell me about it and we'll see.",
       },
     ],
   },
   common: {
-    loading: "One sec, fixing the light.",
+    loading: "Loading",
   },
 };

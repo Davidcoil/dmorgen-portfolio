@@ -2,14 +2,17 @@
 
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 /* שלוש סיבות — רשימה עריכתית ממוספרת, קווי שיער במקום כרטיסים. */
 export function ValueProps({ dict }: { dict: Dictionary }) {
+  const t = dict.home.approach;
   return (
     <section className="border-y border-border bg-card/40">
       <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-        <div className="divide-y divide-border">
-          {dict.home.valueProps.map((prop, i) => (
+        <SectionHeading eyebrow={t.eyebrow} title={t.title} subtitle={t.intro} />
+        <div className="mt-12 divide-y divide-border">
+          {t.items.map((prop, i) => (
             <motion.div
               key={prop.title}
               initial={{ opacity: 0, y: 24 }}

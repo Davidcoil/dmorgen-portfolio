@@ -18,19 +18,13 @@ function resolveLocale(lang: string): Locale {
     : defaultLocale;
 }
 
-/* תיאור מטא ייעודי לעמוד — קצר, עם מילות מפתח, בלי מקף ארוך. */
-const metaDescription: Record<Locale, string> = {
-  he: "דוד מורגנשטרן: מצלם אנשים, כותב ובונה כלי AI. אין אנשים לא פוטוגניים, יש אנשים שעוד לא הרגישו טוב מול מצלמה. להצטלם טוב זה להרגיש טוב.",
-  en: "David Morgenstern: photographs people, writes, and builds AI tools. There are no unphotogenic people, only people who haven't felt good in front of a camera yet.",
-};
-
 export async function generateMetadata({ params }: LangParams): Promise<Metadata> {
   const { lang } = await params;
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
   return {
-    title: `${dict.nav.about} · ${dict.meta.siteName}`,
-    description: metaDescription[locale],
+    title: { absolute: dict.seo.aboutTitle },
+    description: dict.seo.aboutDescription,
   };
 }
 
@@ -96,9 +90,17 @@ export default async function AboutPage({ params }: LangParams) {
             ))}
           </div>
 
-          <Button asChild size="lg" className="mt-10">
-            <Link href={`/${locale}/contact`}>{t.cta}</Link>
-          </Button>
+          <div className="mt-10 flex flex-col gap-5 sm:flex-row">
+            <Button asChild size="lg">
+              <Link href={`/${locale}/galleries`}>{t.ctaPrimary}</Link>
+            </Button>
+            <Link
+              href={`/${locale}/contact`}
+              className="inline-flex h-14 items-center justify-center rounded-full border border-foreground/30 px-10 text-base font-semibold text-foreground transition-all duration-300 hover:border-foreground hover:bg-foreground hover:text-background"
+            >
+              {t.ctaSecondary}
+            </Link>
+          </div>
         </div>
       </div>
 

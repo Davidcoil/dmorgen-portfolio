@@ -23,7 +23,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <BrandLogo lang={lang} dark />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-champagne-200/70">
-            {dict.footer.tagline}
+            {dict.footer.services}
           </p>
         </div>
 
@@ -105,9 +105,6 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <span>
             © {year} {lang === "he" ? "דוד מורגנשטרן" : "David Morgenstern"} ·{" "}
             {dict.footer.rights}
-          </span>
-          <span className="font-semibold tracking-[0.2em]">
-            {lang === "he" ? "צילום אירועים ומשפחה" : "EVENTS & FAMILY PHOTOGRAPHY"}
           </span>
         </div>
       </div>

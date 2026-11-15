@@ -8,11 +8,21 @@ import type { Locale } from "@/lib/i18n/config";
 import { siteConfig, whatsappLink } from "@/lib/site";
 
 /* סקשן סגירה — שקט ובטוח: כותרת סריף גדולה, CTA רך. בלי כרטיסים, בלי רעש. */
-export function CtaSection({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+export function CtaSection({
+  lang,
+  dict,
+  copy,
+}: {
+  lang: Locale;
+  dict: Dictionary;
+  /** בעמודי הגלריות: "צריכים צילום כזה?" במקום סגירת דף הבית */
+  copy?: { title: string; subtitle: string; primary: string };
+}) {
+  const c = copy ?? dict.home.cta;
   const wa = whatsappLink(
     lang === "he"
-      ? "שלום דוד! אשמח לבדוק אם אנחנו מתאימים לצילום האירוע שלנו."
-      : "Hi David! I'd love to see if we're a good fit for our event photography."
+      ? "היי דוד, אני רוצה לספר לך מה אנחנו מתכננים לצלם."
+      : "Hi David, I'd like to tell you what we're planning to photograph."
   );
 
   return (
@@ -30,16 +40,16 @@ export function CtaSection({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <span className="h-px w-8 bg-champagne-500" aria-hidden />
         </p>
         <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl leading-[1.18] text-balance text-foreground md:text-6xl">
-          {dict.home.cta.title}
+          {c.title}
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          {dict.home.cta.subtitle}
+          {c.subtitle}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row">
           <Button asChild size="lg">
-            <Link href={`/${lang}/contact`}>{dict.home.cta.primary}</Link>
+            <Link href={`/${lang}/contact`}>{c.primary}</Link>
           </Button>
-          {wa && (
+          {wa && !copy && (
             <a
               href={wa}
               target="_blank"

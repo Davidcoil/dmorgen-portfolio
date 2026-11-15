@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BadgeCheck, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
 import type { Locale } from "@/lib/i18n/config";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -63,34 +63,24 @@ export function Corporate({
           transition={{ duration: 0.7 }}
           className="mt-16 border-y border-border py-10"
         >
-          <p className="text-center font-display text-lg text-foreground">
-            {t.trustTitle}
-          </p>
-          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {t.trustItems.map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2.5 text-sm font-medium text-foreground"
+          <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+            <Button asChild size="lg">
+              <Link href={`/${lang}/galleries/business`}>
+                {t.ctaGallery}
+                <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />
+              </Link>
+            </Button>
+            {wa && (
+              <a
+                href={wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-14 items-center rounded-full border border-foreground/30 px-10 text-base font-semibold text-foreground transition-all duration-300 hover:border-foreground hover:bg-foreground hover:text-background"
               >
-                <BadgeCheck
-                  className="h-5 w-5 shrink-0 text-champagne-500"
-                  strokeWidth={1.75}
-                  aria-hidden
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
-          {wa && (
-            <div className="mt-8 text-center">
-              <Button asChild size="lg">
-                <Link href={wa} target="_blank" rel="noopener">
-                  {t.cta}
-                  <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />
-                </Link>
-              </Button>
-            </div>
-          )}
+                {t.ctaTalk}
+              </a>
+            )}
+          </div>
         </motion.div>
       </div>
     </section>

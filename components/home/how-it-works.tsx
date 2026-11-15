@@ -14,7 +14,7 @@ export function HowItWorks({ dict }: { dict: Dictionary }) {
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <SectionHeading eyebrow={t.eyebrow} title={t.title} />
 
-        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {t.steps.map((step, i) => (
             <motion.li
               key={step.title}

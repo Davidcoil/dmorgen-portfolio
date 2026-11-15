@@ -114,26 +114,13 @@ export function CategoryTabs({ lang, dict }: { lang: Locale; dict: Dictionary })
         </AnimatePresence>
       </motion.div>
 
-      {/* קישור לסיפור המלא */}
-      <div className="mt-10 text-center">
-        <p className="text-sm text-muted-foreground">{dict.home.midCtaText}</p>
-        <Link
-          href={`/${lang}/contact`}
-          className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-foreground underline decoration-champagne-400 decoration-2 underline-offset-8 transition-colors hover:text-champagne-600 hover:decoration-champagne-600"
-        >
-          {dict.nav.bookNow}
-          <span aria-hidden className="inline-block ltr:-scale-x-100">
-            ←
-          </span>
-        </Link>
-      </div>
 
       <div className="mt-12 text-center">
         <Link
-          href={`/${lang}/galleries/${active}`}
+          href={`/${lang}/galleries`}
           className="inline-flex items-center gap-2 text-sm font-semibold text-foreground underline decoration-champagne-400 decoration-2 underline-offset-8 transition-colors hover:text-champagne-600 hover:decoration-champagne-600"
         >
-          {dict.galleries.viewFullGallery}
+          {dict.home.galleriesCta}
           <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />
         </Link>
       </div>

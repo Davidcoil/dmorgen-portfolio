@@ -29,7 +29,6 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const links = [
     { href: `/${lang}/galleries`, label: dict.nav.galleries },
     { href: `/${lang}/about`, label: dict.nav.about },
-    { href: `/${lang}/client-gallery`, label: dict.nav.clientArea },
     { href: `/${lang}/contact`, label: dict.nav.contact },
   ];
 

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
   return {
-    title: `${dict.clientGallery.title} · ${dict.meta.siteName}`,
+    title: { absolute: dict.seo.clientAreaTitle },
     description: dict.clientGallery.subtitle,
     robots: { index: false, follow: false }, // אזור פרטי ללקוחות — לא לאינדקס
   };
@@ -54,7 +54,7 @@ export default async function ClientGalleryPage({ params }: LangParams) {
           </Button>
           <span className="flex items-center gap-2 text-xs text-muted-foreground">
             <ShieldCheck className="h-4 w-4 text-primary/70" aria-hidden />
-            <span dir="ltr">{new URL(url).hostname}</span>
+            {t.newSiteNote} <span dir="ltr">{new URL(url).hostname}</span>
           </span>
         </div>
       </div>

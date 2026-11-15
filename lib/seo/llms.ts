@@ -126,8 +126,8 @@ export async function buildLlmsFullTxt(): Promise<string> {
     "",
     "## Galleries in detail",
     categoryDetails,
-    "## What clients get",
-    ...he.home.trustStrip.items.map(
+    "## How it works",
+    ...he.home.howItWorks.steps.map(
       (item) => `- **${cleanSeoText(item.title)}**: ${cleanSeoText(item.text)}`
     ),
     "",
@@ -136,7 +136,6 @@ export async function buildLlmsFullTxt(): Promise<string> {
     ...he.home.corporate.services.map(
       (s) => `- **${cleanSeoText(s.title)}**: ${cleanSeoText(s.text)}`
     ),
-    ...he.home.corporate.trustItems.map((t) => `- ${cleanSeoText(t)}`),
     "",
     "## Contact",
     cleanSeoText(he.contact.subtitle),

@@ -21,11 +21,8 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
   const locale = resolveLocale(lang);
   const dict = await getDictionary(locale);
   return {
-    title: `${dict.nav.contact} · ${dict.meta.siteName}`,
-    description:
-      locale === "he"
-        ? "ספרו לדוד מה מצלמים, איפה ומתי: בר מצווה, ברית, יום הולדת, אירוע חברה, משפחה או פורטרט. בודקים התאמה, ואם ממשיכים מקבלים הצעה כתובה."
-        : "Tell David what you're shooting, where and when: a Bar Mitzvah, a brit, a birthday, a company event, a family session or a portrait. If it fits, you get a written proposal.",
+    title: { absolute: dict.seo.contactTitle },
+    description: dict.seo.contactDescription,
   };
 }
 
@@ -38,8 +35,8 @@ export default async function ContactPage({ params }: LangParams) {
 
   const wa = whatsappLink(
     locale === "he"
-      ? "שלום דוד! אשמח לשמוע פרטים על צילומים."
-      : "Hi David! I'd love to hear details about photography for our event."
+      ? "היי דוד, אני רוצה לספר לך מה אנחנו מתכננים לצלם."
+      : "Hi David, I'd like to tell you what we're planning to photograph."
   );
 
   const directItems = [

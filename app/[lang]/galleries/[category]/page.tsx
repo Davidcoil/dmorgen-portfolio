@@ -44,9 +44,8 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const dict = await getDictionary(locale);
   const meta = dict.galleries.categories[slug];
   return {
-    title: `${meta.title} · ${dict.meta.siteName}`,
-    /* תיאור הקטגוריה בלבד — השילוב עם הסלוגן חרג מ־160 תווים בכל שפה. */
-    description: truncateDescription(meta.description),
+    title: { absolute: meta.metaTitle },
+    description: truncateDescription(meta.intro),
   };
 }
 
@@ -64,7 +63,7 @@ export default async function CategoryPage({ params }: PageParams) {
   const jsonLd = imageGalleryJsonLd({
     lang: locale,
     name: `${meta.title} · ${dict.meta.siteName}`,
-    description: meta.description,
+    description: meta.intro,
     pagePath: `/${locale}/galleries/${slug}`,
     images,
   });
@@ -86,7 +85,7 @@ export default async function CategoryPage({ params }: PageParams) {
           align="start"
           eyebrow={meta.tagline}
           title={meta.title}
-          subtitle={meta.description}
+          subtitle={meta.intro}
         />
       </div>
 
@@ -94,7 +93,11 @@ export default async function CategoryPage({ params }: PageParams) {
         <GalleryGrid images={images} lang={locale} dict={dict} />
       </div>
 
-      <CtaSection lang={locale} dict={dict} />
+      <CtaSection
+        lang={locale}
+        dict={dict}
+        copy={{ ...dict.galleries.cta, primary: meta.cta }}
+      />
     </div>
   );
 }

@@ -22,10 +22,10 @@ export function BookingForm({ dict }: { dict: Dictionary }) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const lines = [
-      "שלום דוד! אשמח לבדוק אם אנחנו מתאימים לצילום שלנו.",
+      "היי דוד, אני רוצה לספר לך מה אנחנו מתכננים לצלם.",
       `שם: ${name}`,
       `טלפון: ${phone}`,
-      `סוג אירוע: ${eventType}`,
+      `מה מצלמים: ${eventType}`,
     ];
     if (date) lines.push(`תאריך משוער: ${date}`);
     if (message.trim()) lines.push(`פרטים נוספים: ${message.trim()}`);

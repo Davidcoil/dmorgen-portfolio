@@ -17,7 +17,16 @@ const item: Variants = {
 
 /* Hero טיפוגרפי עריכתי — הכותרת מובילה, התמונה נושמת לצידה.
    עקרון ברזל: אף מילה לא יושבת על פרצוף של אדם. */
-export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+export function Hero({
+  lang,
+  dict,
+  variant = "a",
+}: {
+  lang: Locale;
+  dict: Dictionary;
+  variant?: "a" | "b";
+}) {
+  const copy = variant === "b" ? dict.hero.alt : dict.hero;
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 pt-28 pb-24 md:pt-44 md:pb-32 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
@@ -44,7 +53,7 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             custom={1}
             className="mt-7 font-display text-[2.9rem] leading-[1.12] text-balance text-foreground md:text-6xl lg:text-[4.4rem]"
           >
-            {dict.hero.title}
+            {copy.title}
           </motion.h1>
 
           <motion.p
@@ -54,7 +63,7 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             custom={2}
             className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
           >
-            {dict.hero.subtitle}
+            {copy.subtitle}
           </motion.p>
 
           <motion.div
@@ -65,28 +74,37 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             className="mt-10 flex flex-wrap items-center gap-7"
           >
             <Link
-              href={`/${lang}/contact`}
+              href={`/${lang}/galleries`}
               className="rounded-full bg-foreground px-8 py-4 text-sm font-semibold text-background transition-all duration-300 hover:bg-champagne-600"
             >
               {dict.hero.ctaPrimary}
             </Link>
             <Link
-              href={`/${lang}/galleries`}
+              href={`/${lang}/contact`}
               className="text-sm font-semibold text-foreground underline decoration-champagne-400 decoration-2 underline-offset-8 transition-colors hover:text-champagne-600 hover:decoration-champagne-600"
             >
               {dict.hero.ctaSecondary}
             </Link>
           </motion.div>
 
-          <motion.p
-            variants={item}
-            initial="hidden"
-            animate="show"
-            custom={4}
-            className="mt-12 max-w-md border-s-2 border-champagne-300 ps-4 text-sm leading-relaxed text-muted-foreground italic"
-          >
-            {dict.hero.trustLine}
-          </motion.p>
+          {/* תצוגה מקדימה בלבד: מעבר בין שתי חלופות הכותרת */}
+          <p className="mt-12 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+            {dict.hero.previewSwitch}
+            {(["a", "b"] as const).map((v) => (
+              <Link
+                key={v}
+                href={v === "a" ? `/${lang}` : `/${lang}?hero=b`}
+                scroll={false}
+                className={
+                  v === variant
+                    ? "rounded-full bg-foreground px-3 py-1 font-semibold text-background"
+                    : "rounded-full border border-border px-3 py-1 hover:border-foreground"
+                }
+              >
+                {v.toUpperCase()}
+              </Link>
+            ))}
+          </p>
         </div>
 
         {/* תמונה — פריים שקט, כיתוב מתחת. שום טקסט עליה. */}
