@@ -210,7 +210,12 @@ export function BookingForm({ dict, lang }: { dict: Dictionary; lang: string }) 
         <Send className="h-4 w-4 rtl:rotate-180" aria-hidden />
         {status === "sending" ? t.sending : t.submit}
       </Button>
-      <p className="mt-4 text-center text-xs leading-relaxed text-muted-foreground">{t.note}</p>
+      <p className="mt-4 text-center text-xs leading-relaxed text-muted-foreground">
+        {t.note}{" "}
+        <a href={`/${lang}/privacy`} className="underline underline-offset-2 hover:text-foreground">
+          {lang === "he" ? "מדיניות פרטיות" : "Privacy policy"}
+        </a>
+      </p>
     </form>
   );
 }

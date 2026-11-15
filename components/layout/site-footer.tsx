@@ -106,6 +106,9 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             © {year} {lang === "he" ? "דוד מורגנשטרן" : "David Morgenstern"} ·{" "}
             {dict.footer.rights}
           </span>
+          <Link href={`/${lang}/privacy`} className="transition-colors hover:text-champagne-300">
+            {lang === "he" ? "מדיניות פרטיות" : "Privacy policy"}
+          </Link>
         </div>
       </div>
     </footer>

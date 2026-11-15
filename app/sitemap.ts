@@ -8,7 +8,7 @@ import { gallerySlugs, getCategoryImages, type GalleryCategorySlug } from "@/lib
    priority ו-changefreq הוסרו: גוגל מתעלם מהם. */
 const CONTENT_UPDATED = new Date("2026-11-15");
 
-const paths = ["", "/galleries", ...gallerySlugs.map((s) => `/galleries/${s}`), "/about", "/contact"];
+const paths = ["", "/galleries", ...gallerySlugs.map((s) => `/galleries/${s}`), "/about", "/contact", "/privacy"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com").replace(/\/$/, "");

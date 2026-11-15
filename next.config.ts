@@ -31,6 +31,15 @@ const wixRedirects: Array<{
   { source: "/post/:slug*", destination: "/he", permanent: true },
 ];
 
+// תת-הדומיינים הישנים של Wix. מחקה בדיוק את מה ש-Wix עושה היום (he.X → X, en.X → /en/X),
+// כדי שאפשר יהיה לבטל את Wix בלי שקישורים ישנים ימותו. פעיל רק אחרי שהדומיינים נוספו ל-Vercel.
+const subdomainRedirects = (["he", "en", "m"] as const).map((sub) => ({
+  source: "/:path*",
+  has: [{ type: "host" as const, value: `${sub}.dmorgen.com` }],
+  destination: `https://dmorgen.com${sub === "en" ? "/en" : ""}/:path*`,
+  permanent: true,
+}));
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false, // מסתיר X-Powered-By — פחות רעש, יותר פרימיום
@@ -40,7 +49,7 @@ const nextConfig: NextConfig = {
     // remotePatterns: [{ protocol: "https", hostname: "images.example.com" }],
   },
   async redirects() {
-    return wixRedirects;
+    return [...subdomainRedirects, ...wixRedirects];
   },
 };
 
