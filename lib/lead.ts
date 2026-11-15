@@ -66,3 +66,10 @@ export function formatLead(lead: Lead): string {
   ];
   return lines.filter(Boolean).join("\n");
 }
+
+/** שורת נושא קבועה למייל: הקידומת "[dmorgen lead]" היא מה שסוכני ה-AI וסינוני Gmail מחפשים. */
+export function leadSubject(lead: Lead): string {
+  const who = lead.name || lead.phone;
+  const what = lead.source === "chat" ? "צ'אט" : lead.type || "טופס";
+  return `[dmorgen lead] ${who} · ${what}`;
+}

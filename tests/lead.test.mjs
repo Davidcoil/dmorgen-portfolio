@@ -1,7 +1,7 @@
 // node --test tests/  (Node 24 strips the TypeScript types from lib/lead.ts on import)
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { normalizePhone, parseLead, formatLead } from "../lib/lead.ts";
+import { normalizePhone, parseLead, formatLead, leadSubject } from "../lib/lead.ts";
 
 test("normalizePhone handles Israeli formats", () => {
   assert.equal(normalizePhone("052-555-5970"), "972525555970");
@@ -30,4 +30,9 @@ test("formatLead gives David a reply link", () => {
   assert.match(text, /שם: דנה/);
   assert.match(text, /https:\/\/wa\.me\/972541234567/);
   assert.doesNotMatch(text, /שפה: אנגלית/);
+});
+
+test("leadSubject keeps the stable prefix agents filter on", () => {
+  assert.equal(leadSubject(parseLead({ name: "דנה", phone: "0541234567", type: "פורטרט" }).lead), "[dmorgen lead] דנה · פורטרט");
+  assert.equal(leadSubject(parseLead({ phone: "0541234567", source: "chat" }).lead), "[dmorgen lead] 0541234567 · צ'אט");
 });
