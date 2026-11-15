@@ -34,7 +34,7 @@ export function AboutTeaser({ lang, dict }: { lang: Locale; dict: Dictionary }) 
         <figure className="order-first md:order-last">
           <div className="overflow-hidden rounded-lg border border-border/60">
             <Image
-              src="/images/about-photographer.jpg"
+              src="/images/about-david-portrait.jpg"
               alt={t.imageAlt}
               width={900}
               height={1125}

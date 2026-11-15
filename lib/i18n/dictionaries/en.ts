@@ -205,7 +205,7 @@ export const en: Dictionary = {
       title: "I'm David. The camera is the small part.",
       text: "I'm curious about what people want to show, what they worry others might see, and what will make them smile at their own photo. It's the same with businesses: who are you, and what should the photo say about you? The camera already knows the rest.",
       cta: "A little more about me",
-      imageAlt: "David Morgenstern with a camera in warm sunlight",
+      imageAlt: "David Morgenstern, no camera in hand",
     },
     cta: {
       title: "So, what do you want people to see?",
