@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { defaultLocale, locales, type Locale } from "@/lib/i18n/config";
-import { siteConfig, whatsappLink } from "@/lib/site";
+import { siteConfig, telHref, whatsappLink } from "@/lib/site";
 import { BookingForm } from "@/components/contact/booking-form";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { faqJsonLd } from "@/lib/seo/jsonld";
@@ -44,7 +44,7 @@ export default async function ContactPage({ params }: LangParams) {
       icon: Phone,
       label: t.direct.phoneLabel,
       value: siteConfig.contactPhone,
-      href: `tel:${siteConfig.contactPhone.replace(/[^+\d]/g, "")}`,
+      href: telHref(siteConfig.contactPhone),
       ltr: true,
     },
     siteConfig.contactEmail && {
@@ -80,7 +80,7 @@ export default async function ContactPage({ params }: LangParams) {
 
       <div className="mt-14 grid items-start gap-8 lg:grid-cols-5">
         <div className="order-last lg:order-none lg:col-span-3">
-          <BookingForm dict={dict} />
+          <BookingForm dict={dict} lang={locale} />
         </div>
 
         {directItems.length > 0 && (

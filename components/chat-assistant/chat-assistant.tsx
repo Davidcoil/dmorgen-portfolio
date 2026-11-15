@@ -12,7 +12,7 @@ import { MessageCircle, Send, Sparkles, X } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
 import { detectIntent, getIntent } from "@/lib/chat/engine";
-import { whatsappLink } from "@/lib/site";
+import { siteConfig, telHref, whatsappLink } from "@/lib/site";
 import type { ChatAction, IntentId } from "@/lib/chat/kb";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +22,8 @@ interface Msg {
   text: string;
   actions?: ChatAction[];
   chips?: { label: string; intent: IntentId }[];
+  /** מספר שהמבקר כתב בצ'אט: כפתור ששולח אותו לדוד דרך /api/lead */
+  leadPhone?: string;
 }
 
 let nextId = 1;
@@ -48,9 +50,12 @@ export function ChatAssistant({
     });
   }, [messages, typing, open]);
 
-  const pushBot = (text: string, actions?: ChatAction[], chips?: Msg["chips"]) => {
+  const pushBot = (text: string, actions?: ChatAction[], chips?: Msg["chips"], leadPhone?: string) => {
     const clean = (actions ?? []).filter((a) => a.href && a.href !== "#");
-    setMessages((m) => [...m, { id: nid(), from: "bot", text, actions: clean.length ? clean : undefined, chips }]);
+    setMessages((m) => [
+      ...m,
+      { id: nid(), from: "bot", text, actions: clean.length ? clean : undefined, chips, leadPhone },
+    ]);
   };
 
   /** מענה של הבוט — משותף לשליחת טקסט חופשי ולחיצה על צ'יפ. */
@@ -58,20 +63,40 @@ export function ChatAssistant({
     setTyping(true);
     window.setTimeout(() => {
       const intent = getIntent(lang, intentId);
-      let actions = intent.actions;
-      if (intentId === "callback" && phone) {
-        const msg =
-          lang === "he"
-            ? `היי דוד! השארתי מספר באתר, אשמח שתחזור אלי: ${phone}`
-            : `Hi David! I left my number on the site, please call me back: ${phone}`;
-        const href = whatsappLink(msg);
-        actions = href
-          ? [{ label: { he: "שליחת המספר לדוד", en: "Send the number to David" }, href, external: true, primary: true }]
-          : undefined;
-      }
-      pushBot(intent.answer[lang], actions);
+      pushBot(intent.answer[lang], intent.actions, undefined, intentId === "callback" ? phone : undefined);
       setTyping(false);
     }, 650);
+  };
+
+  /** שולח לדוד את המספר שנכתב בצ'אט, יחד עם מה שהמבקר כתב. נכשל? וואטסאפ וטלפון. */
+  const sendLead = async (msgId: number, phone: string) => {
+    setMessages((m) => m.map((x) => (x.id === msgId ? { ...x, leadPhone: undefined } : x)));
+    setTyping(true);
+    const said = messages
+      .filter((x) => x.from === "user")
+      .map((x) => x.text)
+      .join(" | ");
+    let ok = false;
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ source: "chat", phone, message: said, lang, page: window.location.pathname }),
+      });
+      ok = res.ok;
+    } catch {}
+    setTyping(false);
+    if (ok) {
+      pushBot(chat.numberSent);
+      return;
+    }
+    const waText =
+      lang === "he" ? `היי דוד, השארתי מספר באתר, אשמח שתחזור אליי: ${phone}` : `Hi David, I left my number on your site, please get back to me: ${phone}`;
+    const tel = siteConfig.contactPhone;
+    pushBot(chat.numberFailed, [
+      { label: { he: "לשלוח בוואטסאפ", en: "Send on WhatsApp" }, href: whatsappLink(waText) ?? "#", external: true, primary: true },
+      { label: { he: `להתקשר: ${tel}`, en: `Call: ${tel}` }, href: tel ? telHref(tel) : "#" },
+    ]);
   };
 
   /* שליחת הודעת משתמש — המנוע מנתח את הטקסט ומחזיר כוונה. */
@@ -192,12 +217,12 @@ export function ChatAssistant({
                   {m.actions && (
                     <div className="flex max-w-[85%] flex-wrap gap-2">
                       {m.actions.map((a, i) =>
-                        a.external ? (
+                        a.external || a.href.startsWith("tel:") ? (
                           <a
                             key={i}
                             href={a.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            target={a.external ? "_blank" : undefined}
+                            rel={a.external ? "noopener noreferrer" : undefined}
                             className={cn(
                               "rounded-full px-4 py-2 text-xs font-semibold transition",
                               a.primary
@@ -224,6 +249,16 @@ export function ChatAssistant({
                         )
                       )}
                     </div>
+                  )}
+                  {m.leadPhone && (
+                    <button
+                      type="button"
+                      onClick={() => sendLead(m.id, m.leadPhone!)}
+                      className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-foreground px-5 py-2 text-xs font-semibold text-background transition hover:bg-champagne-600"
+                    >
+                      <Send className="h-3.5 w-3.5 rtl:-scale-x-100" aria-hidden />
+                      {chat.sendNumber} <span dir="ltr">{m.leadPhone}</span>
+                    </button>
                   )}
                   {m.chips && (
                     <div className="flex max-w-full flex-wrap gap-2">

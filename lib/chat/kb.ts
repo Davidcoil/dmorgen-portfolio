@@ -1,14 +1,14 @@
 /* ============================================================================
- * בסיס הידע של עוזר הצ'אט — תשובות דו־לשוניות לפי כוונה (intent).
+ * בסיס הידע של עוזר הצ'אט: תשובות דו-לשוניות לפי כוונה (intent).
  *
- * עקרונות:
- * - אפס עובדות מומצאות: מחירים "מותאמים אישית", זמני מסירה מטווח אמיתי.
- * - דוד לא מצלם חתונות — יש כוונת guard שמסיטה בנימוס לנישה.
- * - הקישורים נבנים דינמית לפי שפה; וואטסאפ דרך siteConfig (מושבת אם אין מספר).
+ * קול V2 (15.11.2026): משפטים מלאים, מה שדוד עושה בצילום, בלי פאנצ'ים.
+ * עובדות רק מתוך הקופי המאושר: אין זמני מסירה קבועים, אין מחירים,
+ * אין הבטחה לבחירת תמונות, אין פרטים משפחתיים, אין חתונות.
+ * כל מסלול נגמר בדרך ודאית להגיע לדוד: טופס, וואטסאפ, טלפון, או מספר שהושאר כאן.
  * ========================================================================== */
 
 import type { Locale } from "@/lib/i18n/config";
-import { whatsappLink } from "@/lib/site";
+import { siteConfig, telHref, whatsappLink } from "@/lib/site";
 
 export type IntentId =
   | "greeting"
@@ -40,20 +40,30 @@ export interface Intent {
   actions?: ChatAction[];
 }
 
-const wa = (message: string): ChatAction => {
-  const href = whatsappLink(message);
-  return {
-    label: { he: "שליחה בוואטסאפ", en: "Send via WhatsApp" },
-    href: href ?? "#",
-    external: true,
-    primary: true,
-  };
-};
+const wa = (message: string, primary = true): ChatAction => ({
+  label: { he: "לכתוב לדוד בוואטסאפ", en: "Message David on WhatsApp" },
+  href: whatsappLink(message) ?? "#",
+  external: true,
+  primary,
+});
 
-/** בונה את רשימת הכוונות לשפה — הקישורים מותאמים ל־locale. */
+const call = (): ChatAction => ({
+  label: {
+    he: `להתקשר: ${siteConfig.contactPhone}`,
+    en: `Call: ${siteConfig.contactPhone}`,
+  },
+  href: siteConfig.contactPhone ? telHref(siteConfig.contactPhone) : "#",
+});
+
+/** בונה את רשימת הכוונות לשפה. הקישורים מותאמים ל-locale. */
 export function getIntents(lang: Locale): Intent[] {
   const L = (he: string, en: string) => ({ he, en });
   const inLang = (path: string) => `/${lang}${path}`;
+  const hi = (he: string, en: string) => (lang === "he" ? he : en);
+  const contactPage: ChatAction = {
+    label: L("לטופס יצירת קשר", "To the contact form"),
+    href: inLang("/contact"),
+  };
 
   return [
     {
@@ -63,176 +73,152 @@ export function getIntents(lang: Locale): Intent[] {
         en: ["hello", "hi", "hey", "good morning", "good evening", "morning"],
       },
       answer: L(
-        "היי. אני העוזר של דוד, הוא כתב אותי, אז אם אני חצוף זה ממנו. שאלו על סוגי הצילומים, מחיר, איך זה עובד או תאריך.",
-        "Hi. I'm David's assistant. He wrote me, so if I'm cheeky, blame him. Ask about the kinds of shoots, pricing, how it works, or a date."
+        "היי. אפשר לשאול על אירועים, משפחה, פורטרטים או צילום לעסק, על מחיר ועל איך מתקדמים. מה אתם מתכננים?",
+        "Hi. Ask me about events, families, portraits or business photography, about pricing, or how it works. What are you planning?"
       ),
     },
     {
       id: "events",
       keywords: {
-        he: ["אירוע", "אירועים", "בר מצווה", "בת מצווה", "ברית", "יום הולדת", "חברה", "עסקי", "חגיגה"],
-        en: ["event", "bar mitzvah", "bat mitzvah", "brit", "birthday", "corporate", "celebration", "party"],
+        he: ["אירוע", "אירועים", "בר מצווה", "בת מצווה", "ברית", "בריתה", "יום הולדת", "חגיגה"],
+        en: ["event", "bar mitzvah", "bat mitzvah", "brit", "birthday", "celebration", "party"],
       },
       answer: L(
-        "בר ובת מצווה, בריתות, ימי הולדת ואירועי חברה. לפני האירוע דוד שואל מי חייב להיות בתמונות ומה אסור לפספס, ואז דואג שהם יהיו שם. אתם רק חוגגים.",
-        "Bar and Bat Mitzvahs, brit ceremonies, birthdays and company events. Before the day, David asks who has to be in the photos and what can't be missed, then makes sure they're there. You just celebrate."
+        "בר ובת מצווה, בריתות, ימי הולדת ואירועי חברה. באירוע כולם זזים ומתרגשים, ואי אפשר להיות בכל מקום באותו רגע. לכן דוד מברר מראש מי חשוב לכם ומה תרצו למצוא בתמונות אחר כך.",
+        "Bar and Bat Mitzvahs, brit ceremonies, birthdays and company events. At an event everyone is moving and celebrating, and nobody can be everywhere at once. So David finds out in advance who matters to you and what you'd like to see in the photos afterwards."
       ),
       actions: [
-        {
-          label: L("לגלריית האירועים", "View events gallery"),
-          href: inLang("/galleries/events"),
-          primary: true,
-        },
+        { label: L("לתמונות מאירועים", "See event photos"), href: inLang("/galleries/events"), primary: true },
+        contactPage,
       ],
     },
     {
       id: "family",
       keywords: {
-        he: ["משפחה", "משפחתי", "ילדים", "טבע", "סטודיו נייד", "צילומי משפחה"],
-        en: ["family", "kids", "children", "outdoor", "nature", "family shoot"],
+        he: ["משפחה", "משפחתי", "ילדים", "טבע", "צילומי משפחה", "נכדים"],
+        en: ["family", "kids", "children", "outdoor", "nature", "family shoot", "grandchildren"],
       },
       answer: L(
-        "צילומי משפחה בטבע או במקום שאתם אוהבים. יש את התמונה שבה כולם מסתכלים למצלמה, ויש את מה שקורה ביניכם כשמפסיקים לחשוב עליה. דוד מחפש מקום לשניהם.",
-        "Family sessions outdoors or at a place you love. There's the photo where everyone looks at the camera, and there's what happens between you when you stop thinking about it. David makes room for both."
+        "קודם דוד דואג לתמונה המשפחתית החשובה, שבה כולם יחד. אחר כך אפשר להניע אנשים, לשחק עם העמדות ולתת לדברים להשתחרר. משפחה לא חייבת לעמוד כמו בול עץ בשביל לצאת טוב.",
+        "First David makes sure you get the important family photo with everyone together. Then there's room to move around, try different arrangements and let everyone loosen up. Nobody has to stand like a statue to look good."
       ),
       actions: [
-        {
-          label: L("לגלריית המשפחה", "View family gallery"),
-          href: inLang("/galleries/family"),
-          primary: true,
-        },
+        { label: L("לתמונות משפחה", "See family photos"), href: inLang("/galleries/family"), primary: true },
+        contactPage,
       ],
     },
     {
       id: "portraits",
       keywords: {
-        he: ["פורטרט", "אישי", "העצמה", "היריון", "הריון", "בוק"],
-        en: ["portrait", "personal", "empowerment", "pregnancy", "maternity", "headshot"],
+        he: ["פורטרט", "פורטרטים", "תדמית אישית", "תמונת פרופיל", "בוק", "פוטוגני"],
+        en: ["portrait", "personal branding", "profile photo", "headshot", "photogenic"],
       },
       answer: L(
-        "פורטרטים, צילומי הריון ותדמית אישית. לא צריך לדעת להצטלם: איפה לעמוד, לאן להסתכל ומה לעשות, זה התפקיד של דוד. שלכם רק להרגיש בנוח, וגם בזה הוא עוזר.",
-        "Portraits, maternity and personal branding. You don't need to know how to pose: where to stand, where to look and what to do is David's job. Yours is to feel comfortable, and he helps with that too."
+        "לא צריך לדעת להצטלם. דוד מכוון, בודק אור וזוויות ומשנה דברים קטנים עד שזה עובד. גם אם עד היום לא אהבתם את עצמכם בתמונות.",
+        "You don't need to know how to pose. David guides you, tries different light and angles, and makes small changes until it works. Even if you've never liked photos of yourself."
       ),
       actions: [
-        {
-          label: L("לגלריית הפורטרטים", "View portraits gallery"),
-          href: inLang("/galleries/portraits"),
-          primary: true,
-        },
+        { label: L("לפורטרטים", "See portraits"), href: inLang("/galleries/portraits"), primary: true },
+        contactPage,
       ],
     },
     {
       id: "business",
       keywords: {
-        he: ["עסק", "עסקי", "מיתוג", "תדמית", "צוות", "כנס", "חברה עסקית", "לינקדאין"],
-        en: ["business", "branding", "corporate", "team", "conference", "headshots", "linkedin", "company"],
+        he: ["עסק", "עסקי", "עסקים", "מיתוג", "תדמית", "צוות", "כנס", "חברה", "לינקדאין", "שיווק"],
+        en: ["business", "branding", "corporate", "team", "conference", "headshots", "linkedin", "company", "marketing"],
       },
       answer: L(
-        "פורטרטים לצוות, אירועי חברה ותוכן מצולם לאתר. דוד קודם שואל מי יראה את התמונות ומה הן צריכות לומר עליכם, ואז מצלם. לפני שמסבירים מי אתם, רואים אתכם.",
-        "Team portraits, company events and photo content for your website. David first asks who will see the images and what they should say about you, then shoots. People see you before they read about you."
+        "פורטרטים לצוות, אירועי חברה ותמונות לשיווק. דוד מתחיל במה שהתמונות צריכות לשמש: מי יראה אותן ואיפה הן יופיעו. משם מתכננים את הצילום.",
+        "Team portraits, company events and marketing images. David starts with how the images will be used: who will see them and where they'll appear. The shoot is planned from there."
       ),
       actions: [
-        {
-          label: L("לגלריה העסקית", "View business gallery"),
-          href: inLang("/galleries/business"),
-          primary: true,
-        },
+        { label: L("לצילום לעסקים", "See business photography"), href: inLang("/galleries/business"), primary: true },
+        wa(hi("היי דוד, אני רוצה לדבר על צילום לעסק.", "Hi David, I'd like to talk about business photography."), false),
       ],
     },
     {
       id: "pricing",
       keywords: {
-        he: ["מחיר", "עולה", "עלות", "כמה", "תעריף", "חבילה", "מחירים"],
-        en: ["price", "cost", "how much", "pricing", "package", "rate", "rates"],
+        he: ["מחיר", "עולה", "עלות", "כמה", "תעריף", "חבילה", "מחירים", "הצעת מחיר"],
+        en: ["price", "cost", "how much", "pricing", "package", "rate", "rates", "quote"],
       },
       answer: L(
-        "המחיר נקבע לפי סוג הצילום, ההיקף, המיקום ומה שתרצו לקבל בסוף. אחרי שיחה קצרה מקבלים הצעה כתובה עם כל מה שכלול. הדרך הכי מהירה: לספר בקצרה בוואטסאפ מה מצלמים.",
-        "The price depends on the type of shoot, its scope, the location and what you want to receive. After a short call you get a written proposal with everything included. Fastest way: tell David briefly on WhatsApp what you're shooting."
+        "המחיר תלוי בסוג הצילום, בהיקף, במיקום ובמה שתרצו לקבל בסוף. אחרי שדוד מבין מה צריך, הוא שולח הצעה כתובה שמפרטת מה כלול. הכי מהיר: לספר לו בקצרה מה מתכננים, איפה ומתי.",
+        "It depends on the type of shoot, the scope, the location and what you'd like to receive. Once David understands what you need, he sends a written proposal that spells out what's included. Fastest way: tell him briefly what you're planning, where and when."
       ),
-      actions: [wa(lang === "he" ? "היי דוד! אשמח לקבל הצעת מחיר לצילומים." : "Hi David! I'd love a quote for a photography session.")],
+      actions: [
+        { ...contactPage, primary: true },
+        wa(hi("היי דוד, אשמח להצעת מחיר. מה שאנחנו מתכננים:", "Hi David, I'd like a quote. Here's what we're planning:"), false),
+      ],
     },
     {
       id: "booking",
       keywords: {
-        he: ["קביע", "תאריך", "להזמין", "שריון", "פנוי", "מתי"],
-        en: ["book", "date", "schedule", "reserve", "available", "availability", "appointment"],
+        he: ["קביע", "לקבוע", "תאריך", "להזמין", "שריון", "פנוי", "פנויים", "איך מתקדמים", "איך זה עובד"],
+        en: ["book", "date", "schedule", "reserve", "available", "availability", "how does it work", "next step"],
       },
       answer: L(
-        "קובעים תאריך דרך הטופס באתר או ישירות בוואטסאפ. בשני המקרים ההודעה כבר מוכנה, רק לשלוח. דוד קורא הכול בעצמו, גם בשתיים בלילה.",
-        "Book a date through the form on the site or directly on WhatsApp. Either way the message is pre-filled, just send it. David reads everything himself, even at 2am."
+        "מספרים לדוד מה מתכננים, איפה ומתי. הוא שולח הצעה כתובה עם היקף, מחיר ומועד מסירה, ורק אז סוגרים. אפשר דרך הטופס באתר, בוואטסאפ, או לכתוב כאן מספר טלפון ואעביר אותו לדוד.",
+        "Tell David what you're planning, where and when. He sends a written proposal with the scope, price and delivery date, and only then do you book. Use the form on the site, WhatsApp, or type a phone number here and I'll pass it on."
       ),
       actions: [
-        {
-          label: L("לעמוד צור הקשר", "To the contact page"),
-          href: inLang("/contact"),
-          primary: true,
-        },
-        wa(lang === "he" ? "היי דוד! אשמח לקבוע תאריך לצילומים." : "Hi David! I'd like to book a photography date."),
+        { ...contactPage, primary: true },
+        wa(hi("היי דוד, אני רוצה לבדוק תאריך לצילום.", "Hi David, I'd like to check a date for a shoot."), false),
       ],
     },
     {
       id: "turnaround",
       keywords: {
-        he: ["מתי מקבלים", "זמן אספקה", "כמה זמן", "מוכן", "תמונות מוכנות", "עריכה"],
+        he: ["מתי מקבלים", "לקבל את התמונות", "מתי התמונות", "זמן אספקה", "כמה זמן", "מוכנות", "תמונות מוכנות", "עריכה", "מסירה"],
         en: ["delivery", "how long", "turnaround", "ready", "editing", "when will"],
       },
       answer: L(
-        "בדרך כלל עד שבוע מהאירוע, אחרי מיון ועריכה. את המועד המדויק סוגרים לפני ההזמנה, כך שאף אחד לא צריך לנחש.",
-        "Usually within a week of the event, after selection and editing. The exact date is set before booking, so nobody has to guess."
+        "את מועד המסירה מסכמים לפני ההזמנה, והוא כתוב בהצעה. התמונות נמסרות אחרי מיון ועריכה, כקבצים דיגיטליים.",
+        "The delivery date is agreed before booking and written in the proposal. The photos are delivered as digital files after selection and editing."
       ),
     },
     {
       id: "clientArea",
       keywords: {
         he: ["אזור לקוחות", "בחיר", "לבחור תמונות", "גלריה שלי", "התמונות שלי", "bchira"],
-        en: ["client area", "select", "choose photos", "my gallery", "my photos", "bchira"],
+        en: ["client area", "choose photos", "my gallery", "my photos", "bchira"],
       },
       answer: L(
-        "באזור הלקוחות בוחרים את התמונות האהובות מהאירוע, מכל מכשיר ובכל שעה. אזהרה: כולם יצאו טוב, אז לבחור זה החלק הקשה.",
-        "The client area is where you choose your favorite photos from the event, from any device, any time. Fair warning: everyone came out good, so choosing is the hard part."
+        "באזור הלקוחות נכנסים לגלריה האישית שלכם וממשיכים לפי ההנחיות שמופיעות שם. נתקעתם? כתבו לדוד בוואטסאפ.",
+        "The client area is where you open your private gallery and follow the instructions there. Stuck? Message David on WhatsApp."
       ),
       actions: [
-        {
-          label: L("לאזור הלקוחות", "To the client area"),
-          href: inLang("/client-gallery"),
-          primary: true,
-        },
+        { label: L("לאזור הלקוחות", "To the client area"), href: inLang("/client-gallery"), primary: true },
+        wa(hi("היי דוד, יש לי שאלה על הגלריה שלי.", "Hi David, I have a question about my gallery."), false),
       ],
     },
     {
       id: "about",
       keywords: {
-        he: ["מי אתה", "מי זה דוד", "על דוד", "הצלם", "אודות", "מאחורי המצלמה"],
-        en: ["who is", "about david", "the photographer", "behind the camera"],
+        he: ["מי אתה", "מי זה דוד", "על דוד", "הצלם", "אודות", "מאחורי המצלמה", "ניסיון"],
+        en: ["who is", "about david", "the photographer", "behind the camera", "experience"],
       },
       answer: L(
-        "דוד מורגנשטרן: מצלם אנשים, כותב, ובונה כלי AI לכל מה שקורה סביב הצילום. אבא. מאמין שלהצטלם טוב זה להרגיש טוב, והמצלמה היא החלק הקטן.",
-        "David Morgenstern: photographs people, writes, and builds AI tools for everything around the shoot. A dad. Believes a good photo starts with feeling good, and the camera is the small part."
+        "דוד מורגנשטרן מצלם אנשים כבר שנים: אירועים, משפחות, פורטרטים ועסקים. הוא מגיע מוכן, משנה לפי מה שקורה ביום עצמו, ודואג קודם לתמונות החשובות. היום הוא מצלם כל עבודה בעצמו.",
+        "David Morgenstern has been photographing people for years: events, families, portraits and businesses. He comes prepared, adapts to what happens on the day, and gets the important photos first. Today he photographs every job himself."
       ),
-      actions: [
-        {
-          label: L("בואו נכיר", "Let's meet"),
-          href: inLang("/about"),
-          primary: true,
-        },
-      ],
+      actions: [{ label: L("עוד על דוד", "More about David"), href: inLang("/about"), primary: true }],
     },
     {
       id: "contact",
       keywords: {
-        he: ["טלפון", "ליצור קשר", "לדבר", "וואטסאפ", "אימייל", "מייל", "קשר"],
-        en: ["phone", "contact", "talk", "whatsapp", "email", "mail"],
+        he: ["טלפון", "ליצור קשר", "לדבר", "וואטסאפ", "אימייל", "מייל", "קשר", "להתקשר"],
+        en: ["phone", "contact", "talk", "whatsapp", "email", "mail", "call"],
       },
       answer: L(
-        "הכי מהיר: וואטסאפ ישירות לדוד. אפשר גם דרך הטופס באתר.",
-        "Fastest: WhatsApp straight to David. The form on the site works too."
+        "אפשר לכתוב לדוד בוואטסאפ, להתקשר, או למלא את הטופס באתר. ואם תכתבו כאן מספר טלפון, אעביר אותו אליו.",
+        "You can message David on WhatsApp, call him, or fill in the form on the site. And if you type a phone number here, I'll pass it on to him."
       ),
       actions: [
-        wa(lang === "he" ? "היי דוד! הגעתי מהאתר, אשמח לדבר." : "Hi David! Coming from the website, I'd love to chat."),
-        {
-          label: L("לעמוד צור קשר", "To the contact page"),
-          href: inLang("/contact"),
-        },
+        wa(hi("היי דוד, הגעתי מהאתר.", "Hi David, I found you through your website.")),
+        call(),
+        contactPage,
       ],
     },
     {
@@ -243,27 +229,25 @@ export function getIntents(lang: Locale): Intent[] {
       },
       answer: L(
         "זה לא סוג האירוע שדוד מצלם. מה שכן: בר ובת מצווה, בריתות, ימי הולדת, צילומי משפחה, פורטרטים ועסקים. אשמח לעזור בכל אחד מאלה.",
-        "That's not the kind of event David photographs. What he does: Bar and Bat Mitzvahs, brit ceremonies, birthdays, family sessions, portraits and business photography. Happy to help with any of those."
+        "That's not the kind of event David photographs. What he does: Bar and Bat Mitzvahs, brit ceremonies, birthdays, family photos, portraits and business photography. Happy to help with any of those."
       ),
     },
     {
       id: "callback",
       keywords: { he: [], en: [] },
       answer: L(
-        "קיבלתי מספר. רוצים שדוד יחזור אליכם? לחיצה אחת וההודעה אצלו בוואטסאפ.",
-        "Got the number. Want David to call you back? One tap and the message reaches him on WhatsApp."
+        "קיבלתי את המספר. לשלוח אותו לדוד כדי שיחזור אליכם?",
+        "Got the number. Shall I send it to David so he can get back to you?"
       ),
     },
     {
       id: "fallback",
       keywords: { he: [], en: [] },
       answer: L(
-        "לא הבנתי עד הסוף, וזה עליי, לא עליכם. אפשר לנסח אחרת? או פשוט לכתוב לדוד ישירות, הוא עונה מהר.",
-        "I didn't fully get that, and that's on me, not you. Could you rephrase? Or just write to David directly, he replies fast."
+        "את זה לא הבנתי. אפשר לנסח אחרת, או לכתוב לדוד ישירות. ואם תכתבו כאן מספר טלפון, אעביר אותו אליו.",
+        "I didn't catch that. Try rephrasing, or write to David directly. And if you type a phone number here, I'll pass it on to him."
       ),
-      actions: [
-        wa(lang === "he" ? "היי דוד! שאלה מהאתר." : "Hi David! A question from the website."),
-      ],
+      actions: [wa(hi("היי דוד, שאלה מהאתר:", "Hi David, a question from the website:")), contactPage],
     },
   ];
 }

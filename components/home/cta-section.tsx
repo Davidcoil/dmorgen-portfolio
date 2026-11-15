@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
 import type { Locale } from "@/lib/i18n/config";
-import { siteConfig, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 /* סקשן סגירה — שקט ובטוח: כותרת סריף גדולה, CTA רך. בלי כרטיסים, בלי רעש. */
 export function CtaSection({
@@ -60,11 +60,6 @@ export function CtaSection({
             </a>
           )}
         </div>
-        {!siteConfig.whatsappNumber && (
-          <p className="mt-6 text-xs text-muted-foreground">
-            {dict.contact.form.missingNumber}
-          </p>
-        )}
       </motion.div>
     </section>
   );

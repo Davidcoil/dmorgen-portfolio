@@ -23,7 +23,7 @@ export const en: Dictionary = {
       "David Morgenstern photographs events, families, portraits and businesses. He comes prepared, adapts to the day, and gets the important photos first.",
     contactTitle: "Contact David Morgenstern | Photography Inquiries",
     contactDescription:
-      "Tell David Morgenstern what you'd like photographed, where and when. An event, family photos, a portrait or business photography. Your details open as a WhatsApp draft.",
+      "Tell David Morgenstern what you'd like photographed, where and when. An event, family photos, a portrait or business photography. Your details go straight to David.",
     clientAreaTitle: "Client Area | David Morgenstern",
   },
   nav: {
@@ -304,7 +304,7 @@ export const en: Dictionary = {
   contact: {
     title: "What would you like photographed?",
     subtitle:
-      "Tell me a little about the job: what kind of photography, the approximate date, location and anything especially important. The details will open in WhatsApp, where we can take it from there.",
+      "Tell me a little about the job: what kind of photography, the approximate date, location and anything especially important. The details come straight to me, and I'll get back to you.",
     form: {
       name: "Name",
       namePlaceholder: "What should I call you?",
@@ -314,10 +314,17 @@ export const en: Dictionary = {
       eventDate: "Approximate date",
       message: "Tell me what's important (optional)",
       messagePlaceholder: "Location, who's involved, what you'd like to receive...",
-      submit: "Open message in WhatsApp",
-      note: "Your details will appear in a draft message. You can check it before sending.",
-      missingNumber:
-        "WhatsApp number not configured. Add NEXT_PUBLIC_WHATSAPP_NUMBER to your environment file.",
+      submit: "Send the details",
+      sending: "Sending...",
+      note: "Your details come straight to me. After sending, you can continue on WhatsApp too.",
+      phoneInvalid: "Looks like the phone number is missing a digit.",
+      sentTitle: "Got it, thank you.",
+      sentText: "Your details are with me and I'll get back to you soon. Want to add something? You can continue on WhatsApp.",
+      continueWhatsapp: "Continue on WhatsApp",
+      fallbackTitle: "One more small step",
+      fallbackText: "Tap the button to send me your details on WhatsApp, or just call.",
+      sendWhatsapp: "Send on WhatsApp",
+      callLabel: "Call:",
       eventTypes: ["Event", "Family & children", "Portrait", "Business photography", "Something else"],
     },
     direct: {
@@ -345,17 +352,20 @@ export const en: Dictionary = {
     fabLabel: "Open chat with David's assistant",
     closeLabel: "Close chat",
     title: "David's Assistant",
-    online: "Awake. Even when David isn't.",
+    online: "Answers here, David gets back to you",
     inputPlaceholder: "Type a message",
     sendLabel: "Send",
     welcome:
-      "Hi, I'm David's assistant. He wrote me, so if I'm cheeky, blame him. What are we talking about: events, family, business, a date or a price?",
+      "Hi, I'm David's assistant on the site. Ask me about the kinds of shoots, pricing, or how it works. And if you type a phone number here, I'll pass it on to David.",
     quickReplies: [
       { label: "Event photography", intent: "events" },
       { label: "Family sessions", intent: "family" },
       { label: "How much does it cost?", intent: "pricing" },
-      { label: "Book a date", intent: "booking" },
+      { label: "How does it work?", intent: "booking" },
     ],
+    sendNumber: "Send my number to David",
+    numberSent: "David has your number. He'll get back to you soon.",
+    numberFailed: "I couldn't pass on the number. You can message David on WhatsApp or call him.",
   },
   faq: {
     title: "Questions people ask me",

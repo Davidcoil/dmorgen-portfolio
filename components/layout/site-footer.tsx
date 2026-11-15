@@ -3,7 +3,7 @@ import { ArrowLeft, Mail, MessageCircle, Phone } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
 import type { Locale } from "@/lib/i18n/config";
 import { BrandLogo } from "@/components/brand/logo";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, telHref } from "@/lib/site";
 
 export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const year = new Date().getFullYear();
@@ -55,7 +55,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             {siteConfig.contactPhone && (
               <li>
                 <a
-                  href={`tel:${siteConfig.contactPhone.replace(/[^+\d]/g, "")}`}
+                  href={telHref(siteConfig.contactPhone)}
                   className="flex items-center gap-3 text-background/80 transition-colors hover:text-champagne-300"
                 >
                   <Phone className="h-4 w-4 text-champagne-400" />
