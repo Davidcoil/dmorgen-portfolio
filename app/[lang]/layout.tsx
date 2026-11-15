@@ -13,6 +13,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { ChatAssistant } from "@/components/chat-assistant/chat-assistant";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { siteGraphJsonLd } from "@/lib/seo/jsonld";
+import { Analytics } from "@vercel/analytics/next";
 
 /* דיספליי גיאומטרי בטוח לכותרות — Secular One: עוצמה, יציבות, מודרניות.
    משקל יחיד 400 (כבד מטבעו) — היררכיה דרך גודל, לא דרך משקל.
@@ -108,6 +109,8 @@ export default async function LangLayout({
         <main>{children}</main>
         <SiteFooter lang={locale} dict={dict} />
         <ChatAssistant lang={locale} chat={dict.chat} />
+        {/* מדידת ביקורים בלי עוגיות (Vercel Web Analytics). מקור ההגעה, כולל chatgpt.com, מופיע בלוח. */}
+        <Analytics />
       </body>
     </html>
   );
