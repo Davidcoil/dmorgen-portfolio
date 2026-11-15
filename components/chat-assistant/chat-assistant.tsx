@@ -15,6 +15,7 @@ import { detectIntent, getIntent } from "@/lib/chat/engine";
 import { siteConfig, telHref, whatsappLink } from "@/lib/site";
 import type { ChatAction, IntentId } from "@/lib/chat/kb";
 import { cn } from "@/lib/utils";
+import { captureAttribution, getAttribution } from "@/lib/attribution";
 
 interface Msg {
   id: number;
@@ -42,6 +43,9 @@ export function ChatAssistant({
   const [typing, setTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const welcomed = useRef(false);
+
+  // הצ'אט נטען בכל עמוד: כאן נרשם מאיפה המבקר הגיע (נשאר במכשיר שלו)
+  useEffect(() => captureAttribution(), []);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -81,7 +85,14 @@ export function ChatAssistant({
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ source: "chat", phone, message: said, lang, page: window.location.pathname }),
+        body: JSON.stringify({
+          source: "chat",
+          phone,
+          message: said,
+          lang,
+          page: window.location.pathname,
+          attribution: getAttribution(),
+        }),
       });
       ok = res.ok;
     } catch {}

@@ -5,6 +5,7 @@ import { CalendarDays, CheckCircle2, MessageCircle, Phone, Send } from "lucide-r
 import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/i18n/dictionaries/he";
 import { siteConfig, telHref, whatsappLink } from "@/lib/site";
+import { getAttribution } from "@/lib/attribution";
 
 type Status = "idle" | "sending" | "sent" | "fallback";
 
@@ -61,6 +62,7 @@ export function BookingForm({ dict, lang }: { dict: Dictionary; lang: string }) 
           website,
           lang,
           page: window.location.pathname,
+          attribution: getAttribution(),
         }),
       });
       setStatus(res.ok ? "sent" : "fallback");
